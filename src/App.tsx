@@ -9,8 +9,8 @@ function App() {
   return (
     <Router>
       <Routes>
-        <Route path="/" element={<HeroSection />} />        {/* Home page */}
-        <Route path="/edit-profile" element={<EditProfile />} />  {/* Profile editing page */}
+        <Route path="/" element={<HeroSection />} />       
+        <Route path="/edit-profile" element={<EditProfile />} /> 
       </Routes>
     </Router>
   )
