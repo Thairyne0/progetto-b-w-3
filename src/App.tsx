@@ -1,7 +1,7 @@
 // import { useState } from "react";
 import "./App.css";
 // import PageAccedi from "./components/PageAccedi";
-import Profile from "./pages/profile";
+import Profile from "./pages/Profile";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 
 function App() {
