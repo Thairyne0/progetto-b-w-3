@@ -3,7 +3,7 @@
 
 const MyCard = () => {
     return (
-        <div>
+        <div className="grid ">
             
         </div>
     )
