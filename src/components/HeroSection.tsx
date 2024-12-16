@@ -1,8 +1,9 @@
 import "bootstrap-icons/font/bootstrap-icons.css";
 import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
+import TokenProps from "../types/Hero";
 
-const HeroSection = () => {
+const HeroSection = (props:TokenProps) => {
   const imgHeroStyle = {
     borderRadius: "50%",
     width: "9em",
@@ -65,7 +66,7 @@ const HeroSection = () => {
     fetch("https://striveschool-api.herokuapp.com/api/profile/me", {
       headers: {
         Authorization:
-          "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NzVmZTQyYTBlYTI4NjAwMTUyOGI5MjgiLCJpYXQiOjE3MzQzNDgyMDIsImV4cCI6MTczNTU1NzgwMn0.SJckLJO8QVlGPUJQYCZM4ftYV_vnB58ae91FqnJcb6o", // Your token
+          `Bearer ${props.token}`, // Your token
         "Content-Type": "application/json",
       },
     })

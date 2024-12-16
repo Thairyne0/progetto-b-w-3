@@ -26,6 +26,7 @@ interface ExperienceProps {
 
 const CardExperience = (props: ExperienceProps) => {
   return (
+    <>
     <Col>
       <Row className="g-2">
         <Col className="col-2 col-md-1 ">
@@ -89,6 +90,8 @@ const CardExperience = (props: ExperienceProps) => {
         </Col>
       </Row>
     </Col>
+    <hr />
+    </>
   );
 };
 
