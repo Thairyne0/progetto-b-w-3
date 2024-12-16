@@ -49,7 +49,7 @@ const MyFooter = () => {
 
                     <div className="d-flex"><span><i className="bi bi-shield-shaded fs-5" style={{ color: '#7c7c7c' }}> </i></span><span className="ms-2"><small style={{ color: '#7c7c7c', fontSize: '0.800rem', fontWeight: 'bold' }}>Recommendation transparency</small><p className="m-0 small mb-2 footer-text">Learn more about Recommended Content.</p></span></div>
                 </Col>
-                <Col ><p className="mb-1 footer-text">Select Language</p>
+                <Col><p className="mb-1 footer-text">Select Language</p>
                     <Form.Select aria-label="language-selection" style={{
                         color: '#7c7c7c', fontSize: '0.777rem', border: '1px solid black',
                     }}>
