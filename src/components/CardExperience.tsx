@@ -16,6 +16,10 @@ import IExperience from "../types/Experience";
 //     "_id": "5d925e677360c41e0046d1f5" // SERVER GENERATED
 //   }
 
+
+// Creo la card per ogni esperienza dell'utente
+
+
 interface ExperienceProps {
   experience: IExperience;
 }

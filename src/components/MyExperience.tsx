@@ -5,9 +5,11 @@ import IExperience from "../types/Experience";
 const MyExperience = () => {
   const [experiences, setExperiences] = useState<IExperience[]>([]);
 
+
+//    fetch per trovare le eseprienze dell'utente tramite l'id del profilo
   const getExperience = () => {
     fetch(
-      "https://striveschool-api.herokuapp.com/api/profile/:5d925e677360c41e0046d1f5/experiences"
+      "https://striveschool-api.herokuapp.com/api/profile/:{id profilo}/experiences"
     )
       .then((response) => {
         if (response.ok) {
