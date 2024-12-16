@@ -1,4 +1,5 @@
 // import { useState } from "react";
+import { Navigate } from "react-router-dom";
 import "./App.css";
 import EditProfile from "./components/EditProfile";
 // import PageAccedi from "./components/PageAccedi";
@@ -22,11 +23,12 @@ function App() {
   return (
     <>
       <BrowserRouter>
-        <Routes>
-          {/* <Route path="/" element={<Home />} /> */}
-          <Route path="/profile" element={<Profile></Profile>} />
-          <Route path="/edit-profile" element={<EditProfile></EditProfile>} />
-        </Routes>
+      
+<Routes>
+  <Route path="/" element={<Navigate to="/profile" />} />
+  <Route path="/profile" element={<Profile />} />
+  <Route path="/edit-profile" element={<EditProfile />} />
+</Routes>
       </BrowserRouter>
       {/* <PageAccedi
         token={token}
