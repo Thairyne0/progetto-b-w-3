@@ -116,7 +116,7 @@ const HeroSection = () => {
             <img
               style={imgHeroStyle}
               alt="profile-picture"
-              src="https://placecats.com/300/200"
+              src={profileData.image}
             ></img>
             <button style={cameraButtonStyle}>
               <i className="bi bi-camera"></i>
@@ -127,6 +127,7 @@ const HeroSection = () => {
           <h1>{profileData.name} {profileData.surname}</h1>
           <h2>{profileData.title}</h2>
           <p>{profileData.area}</p>
+          <p>{profileData.bio}</p>
           <a
             href="
             #"
