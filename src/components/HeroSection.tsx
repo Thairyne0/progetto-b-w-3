@@ -1,5 +1,7 @@
 import "bootstrap-icons/font/bootstrap-icons.css";
-import { useState, useEffect } from "react";
+import { useState, useEffect, } from "react";
+import { useNavigate } from 'react-router-dom';
+
 
 const HeroSection = () => {
   const imgHeroStyle = {
@@ -54,6 +56,13 @@ const HeroSection = () => {
     image: '',   
 
   })
+
+
+  const navigate = useNavigate();
+
+  const handleEditProfile = () => {
+    navigate('/edit-profile');
+  };
 
   useEffect(() => {
     fetch("https://striveschool-api.herokuapp.com/api/profile/me", {
@@ -130,6 +139,7 @@ const HeroSection = () => {
               style={buttonStyles(hoveredButton1)}
               onMouseEnter={() => setHoveredButton1(true)}
               onMouseLeave={() => setHoveredButton1(false)}
+              onClick={handleEditProfile}
             >
               Modifica Profilo
             </button>
