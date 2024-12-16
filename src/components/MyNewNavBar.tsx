@@ -18,7 +18,7 @@ function MyNewNavBar() {
         <Navbar.Collapse id="navbarScroll">
           <Nav
             className="me-auto my-2 my-lg-0"
-            style={{ maxHeight: "100px" }}
+            style={{ maxHeight: "300px" }}
             navbarScroll
           >
             <Form className="d-flex me-5">
@@ -30,11 +30,26 @@ function MyNewNavBar() {
               />
               <Button variant="btn btn-primary">Cerca</Button>
             </Form>
-            <Nav.Link href="#action1">Home</Nav.Link>
-            <Nav.Link href="#action2">Rete</Nav.Link>
-            <Nav.Link href="#action2">Lavoro</Nav.Link>
-            <Nav.Link href="#action2">Messaggistica</Nav.Link>
-            <Nav.Link href="#action2">Notifiche</Nav.Link>
+            <Nav.Link href="#action1" className="fw-bold">
+              <i className="bi bi-house-heart-fill me-1"></i>
+              Home
+            </Nav.Link>
+            <Nav.Link href="#action2" className="fw-bold">
+              <i className="bi bi-people-fill  me-1"></i>
+              Rete
+            </Nav.Link>
+            <Nav.Link href="#action2" className="fw-bold">
+              <i className="bi bi-suitcase-lg-fill  me-1"></i>
+              Lavoro
+            </Nav.Link>
+            <Nav.Link href="#action2" className="fw-bold">
+              <i className="bi bi-chat-dots-fill  me-1"></i>
+              Messaggistica
+            </Nav.Link>
+            <Nav.Link href="#action2" className="fw-bold">
+              <i className="bi bi-bell-fill  me-1"></i>
+              Notifiche
+            </Nav.Link>
             <NavDropdown title="Account" id="navbarScrollingDropdown">
               <NavDropdown.Item href="#action3">Action</NavDropdown.Item>
               <NavDropdown.Item href="#action4">
@@ -46,7 +61,24 @@ function MyNewNavBar() {
               </NavDropdown.Item>
             </NavDropdown>
           </Nav>
-          <NavDropdown title="Per le aziende" id="navbarScrollingDropdown">
+          <NavDropdown
+            title="Per le aziende"
+            id="navbarScrollingDropdown"
+            className="d-lg-none"
+          >
+            <NavDropdown.Item href="#action3">Action</NavDropdown.Item>
+            <NavDropdown.Item href="#action4">Another action</NavDropdown.Item>
+            <NavDropdown.Divider />
+            <NavDropdown.Item href="#action5">
+              Something else here
+            </NavDropdown.Item>
+          </NavDropdown>
+          <NavDropdown
+            title="Per le aziende"
+            id="navbarScrollingDropdown"
+            className="d-none d-lg-block"
+            drop="start"
+          >
             <NavDropdown.Item href="#action3">Action</NavDropdown.Item>
             <NavDropdown.Item href="#action4">Another action</NavDropdown.Item>
             <NavDropdown.Divider />
