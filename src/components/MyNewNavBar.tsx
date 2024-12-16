@@ -76,7 +76,7 @@ function MyNewNavBar() {
           <NavDropdown
             title="Per le aziende"
             id="navbarScrollingDropdown"
-            className="d-none d-lg-block"
+            className="d-none d-lg-block me-3"
             drop="start"
           >
             <NavDropdown.Item href="#action3">Action</NavDropdown.Item>

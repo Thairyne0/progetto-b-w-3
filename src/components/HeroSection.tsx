@@ -1,7 +1,6 @@
 import "bootstrap-icons/font/bootstrap-icons.css";
-import { useState, useEffect, } from "react";
-import { useNavigate } from 'react-router-dom';
-
+import { useState, useEffect } from "react";
+import { useNavigate } from "react-router-dom";
 
 const HeroSection = () => {
   const imgHeroStyle = {
@@ -47,21 +46,19 @@ const HeroSection = () => {
   const [hoveredButton2, setHoveredButton2] = useState(false);
 
   const [profileData, setProfileData] = useState({
-    name: '',
-    surname: '',
-    username: '',
-    bio: '',
-    title: '',
-    area: '',
-    image: '',   
-
-  })
-
+    name: "",
+    surname: "",
+    username: "",
+    bio: "",
+    title: "",
+    area: "",
+    image: "",
+  });
 
   const navigate = useNavigate();
 
   const handleEditProfile = () => {
-    navigate('/edit-profile');
+    navigate("/edit-profile");
   };
 
   useEffect(() => {
@@ -83,14 +80,14 @@ const HeroSection = () => {
       .then((data) => {
         console.log(data);
         setProfileData({
-            name: data.name,
-            surname: data.surname,
-            username: data.username,
-            bio: data.bio,
-            title: data.title,
-            area: data.area,
-            image: data.image,  
-        })
+          name: data.name,
+          surname: data.surname,
+          username: data.username,
+          bio: data.bio,
+          title: data.title,
+          area: data.area,
+          image: data.image,
+        });
       })
 
       .catch((error) => {
@@ -100,8 +97,9 @@ const HeroSection = () => {
 
   return (
     <>
-      <section className="m-5">
+      <section className="m-0 mt-5 m-md-5 bg-white rounded-3">
         <div
+          className=" rounded-top-3"
           style={{
             backgroundImage: "url(https://placehold.co/400)",
             height: "200px",
@@ -123,8 +121,10 @@ const HeroSection = () => {
             </button>
           </div>
         </div>
-        <div className="border border-2 p-5 ">
-          <h1>{profileData.name} {profileData.surname}</h1>
+        <div className="border border-2 p-5 rounded-bottom-3">
+          <h1>
+            {profileData.name} {profileData.surname}
+          </h1>
           <h2>{profileData.title}</h2>
           <p>{profileData.area}</p>
           <p>{profileData.bio}</p>
