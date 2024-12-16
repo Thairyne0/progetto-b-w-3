@@ -2,9 +2,6 @@ import "bootstrap-icons/font/bootstrap-icons.css";
 import { useState, useEffect } from "react";
 
 const HeroSection = () => {
-    const [hoveredButton1, setHoveredButton1] = useState(false);
-    const [hoveredButton2, setHoveredButton2] = useState(false);
-
   const imgHeroStyle = {
     borderRadius: "50%",
     width: "9em",
@@ -28,13 +25,13 @@ const HeroSection = () => {
   };
 
   const buttonStyles = (hovered: boolean) => ({
-    backgroundColor: hovered ? 'blue' : 'white',
-    border: 'blue 1px solid',
-    color: hovered ? 'white' : 'blue',
-    margin: '0.5em',
-    borderRadius: '30px',
-    padding: '0.25em 1em',
-    cursor: 'pointer',
+    backgroundColor: hovered ? "blue" : "white",
+    border: "blue 1px solid",
+    color: hovered ? "white" : "blue",
+    margin: "0.5em",
+    borderRadius: "30px",
+    padding: "0.25em 1em",
+    cursor: "pointer",
   });
 
   const containerImg = {
@@ -44,24 +41,53 @@ const HeroSection = () => {
     top: "90%",
   };
 
-useEffect(()=>{
-    fetch('https://striveschool-api.herokuapp.com/api/profile/me',
-       { headers: {'Authorization': 'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NzVmZTQyYTBlYTI4NjAwMTUyOGI5MjgiLCJpYXQiOjE3MzQzNDgyMDIsImV4cCI6MTczNTU1NzgwMn0.SJckLJO8QVlGPUJQYCZM4ftYV_vnB58ae91FqnJcb6o', // Your token
-        'Content-Type': 'application/json',}}
-    )
+  const [hoveredButton1, setHoveredButton1] = useState(false);
+  const [hoveredButton2, setHoveredButton2] = useState(false);
 
-    .then((response)=>{
-        if(response.ok){
-            return response.json()
-        } else {throw new Error('Failed to fetch data'); }
+  const [profileData, setProfileData] = useState({
+    name: '',
+    surname: '',
+    username: '',
+    bio: '',
+    title: '',
+    area: '',
+    image: '',   
+
+  })
+
+  useEffect(() => {
+    fetch("https://striveschool-api.herokuapp.com/api/profile/me", {
+      headers: {
+        Authorization:
+          "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NzVmZTQyYTBlYTI4NjAwMTUyOGI5MjgiLCJpYXQiOjE3MzQzNDgyMDIsImV4cCI6MTczNTU1NzgwMn0.SJckLJO8QVlGPUJQYCZM4ftYV_vnB58ae91FqnJcb6o", // Your token
+        "Content-Type": "application/json",
+      },
     })
+      .then((response) => {
+        if (response.ok) {
+          return response.json();
+        } else {
+          throw new Error("Failed to fetch data");
+        }
+      })
 
-    .then ((data)=> {
+      .then((data) => {
         console.log(data);
-    })
+        setProfileData({
+            name: data.name,
+            surname: data.surname,
+            username: data.username,
+            bio: data.bio,
+            title: data.title,
+            area: data.area,
+            image: data.image,  
+        })
+      })
 
-    .catch ((error)=> { console.error(error);})
-},[])
+      .catch((error) => {
+        console.error(error);
+      });
+  }, []);
 
   return (
     <>
@@ -78,16 +104,20 @@ useEffect(()=>{
           }}
         >
           <div style={containerImg}>
-            <img style={imgHeroStyle} src="https://placecats.com/300/200"></img>
+            <img
+              style={imgHeroStyle}
+              alt="profile-picture"
+              src="https://placecats.com/300/200"
+            ></img>
             <button style={cameraButtonStyle}>
               <i className="bi bi-camera"></i>
             </button>
           </div>
         </div>
         <div className="border border-2 p-5 ">
-          <h1>name surname</h1>
-          <h2>title</h2>
-          <p>area</p>
+          <h1>{profileData.name} {profileData.surname}</h1>
+          <h2>{profileData.title}</h2>
+          <p>{profileData.area}</p>
           <a
             href="
             #"
@@ -106,8 +136,10 @@ useEffect(()=>{
             <button
               style={buttonStyles(hoveredButton2)}
               onMouseEnter={() => setHoveredButton2(true)}
-              onMouseLeave={() => setHoveredButton2(false)}>
-                Aggiungi sezione del profilo</button>
+              onMouseLeave={() => setHoveredButton2(false)}
+            >
+              Aggiungi sezione del profilo
+            </button>
           </div>
         </div>
       </section>
