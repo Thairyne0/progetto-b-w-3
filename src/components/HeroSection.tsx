@@ -1,5 +1,5 @@
 import "bootstrap-icons/font/bootstrap-icons.css";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 
 const HeroSection = () => {
     const [hoveredButton1, setHoveredButton1] = useState(false);
@@ -43,6 +43,26 @@ const HeroSection = () => {
     left: "10%",
     top: "90%",
   };
+
+useEffect(()=>{
+    fetch('https://striveschool-api.herokuapp.com/api/profile/me',
+       { headers: {'Authorization': 'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NzVmZTQyYTBlYTI4NjAwMTUyOGI5MjgiLCJpYXQiOjE3MzQzNDgyMDIsImV4cCI6MTczNTU1NzgwMn0.SJckLJO8QVlGPUJQYCZM4ftYV_vnB58ae91FqnJcb6o', // Your token
+        'Content-Type': 'application/json',}}
+    )
+
+    .then((response)=>{
+        if(response.ok){
+            return response.json()
+        } else {throw new Error('Failed to fetch data'); }
+    })
+
+    .then ((data)=> {
+        console.log(data);
+    })
+
+    .catch ((error)=> { console.error(error);})
+},[])
+
   return (
     <>
       <section className="m-5">
