@@ -77,7 +77,7 @@ const EditProfile = () => {
   };
 
   return (
-    <div className="border border-2 mt-5 d-flex flex-column">
+    <div className="border border-2 mt-5 d-flex flex-column shadow-sm">
       <h1 className="text-center mt-5">Edit Profile</h1>
      
       <form className='p-5 d-flex flex-column'>
@@ -145,7 +145,7 @@ const EditProfile = () => {
           />
         </div>
 
-        <button type="button" onClick={handleUpdateProfile} className='border border-none'>Save Profile</button>
+        <button type="button" onClick={handleUpdateProfile} style={{width: '100px', padding:'0.25em, 1em'}} className='btn-sm border border-primary rounded-pill bg-white text-primary float-start'>Save Profile</button>
       </form>
     </div>
   );

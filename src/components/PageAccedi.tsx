@@ -1,13 +1,14 @@
 import { Navbar, Container, Row, Col, Form, Button } from "react-bootstrap";
-
+import { useNavigate } from "react-router-dom";
 interface  PageAccediProps {
     token: string;
     ChangeToken: (value: string) => void;
     onSubmit: (event: React.FormEvent) => void;}
-
-
-const PageAccedi = (props:PageAccediProps) => {
-
+    
+    
+    const PageAccedi = (props:PageAccediProps) => {
+        
+        const navigate=useNavigate()
 
 
   return (
@@ -39,7 +40,7 @@ const PageAccedi = (props:PageAccediProps) => {
                 </Form.Text>
               </Form.Group>
 
-              <Button variant="primary" type="submit">
+              <Button  variant="primary" type="button" onClick={()=>{navigate("/profile")}}>
                 Accedi
               </Button>
             </Form>

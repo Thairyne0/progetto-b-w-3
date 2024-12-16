@@ -1,15 +1,17 @@
 import { useEffect, useState } from "react";
 import CardExperience from "./CardExperience";
 import IExperience from "../types/Experience";
+import TokenProps from "../types/Hero";
 
-const MyExperience = () => {
+
+const MyExperience = (props:TokenProps) => {
   const [experiences, setExperiences] = useState<IExperience[]>([]);
-
+  
 
 //    fetch per trovare le eseprienze dell'utente tramite l'id del profilo
   const getExperience = () => {
     fetch(
-      "https://striveschool-api.herokuapp.com/api/profile/:{id profilo}/experiences"
+      `https://striveschool-api.herokuapp.com/api/profile/:${props.token}/experiences`
     )
       .then((response) => {
         if (response.ok) {
@@ -31,9 +33,17 @@ const MyExperience = () => {
     getExperience();
   }, []);
 
-  return experiences.map((e) => {
-    return <CardExperience experience={e} />;
-  });
-};
+  return (
+    <>
+    <section className="m-0 mt-5 m-md-5 bg-white rounded-3">
+  <h4>Experience</h4>
+    {experiences.map((e) => {
+    return (
+    <CardExperience experience={e} />)
+  })}
+  </section>
+  </>
+)}
+
 export default MyExperience;
 
