@@ -1,5 +1,6 @@
 // import { useState } from "react";
 import "./App.css";
+import EditProfile from "./components/EditProfile";
 // import PageAccedi from "./components/PageAccedi";
 import Profile from "./pages/Profile";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
@@ -24,6 +25,7 @@ function App() {
         <Routes>
           {/* <Route path="/" element={<Home />} /> */}
           <Route path="/profile" element={<Profile></Profile>} />
+          <Route path="/edit-profile" element={<EditProfile></EditProfile>} />
         </Routes>
       </BrowserRouter>
       {/* <PageAccedi
