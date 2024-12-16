@@ -1,12 +1,9 @@
-import "./App.css";
-import MyNewNavBar from "./components/MyNewNavBar";
+import './App.css'
 
 function App() {
-  return (
-    <>
-      <MyNewNavBar></MyNewNavBar>
-    </>
-  );
+ 
+
+
 }
 
-export default App;
+export default App
