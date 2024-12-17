@@ -23,10 +23,10 @@ const AddExperience = () => {
         hybrid: false,
     });
     //funzione per rendere la data come mese-anno
-    const formattedDate = (date: string) => {
-        return new Date(date).toLocaleDateString('it-IT', { month: 'numeric', year: 'numeric' })
+    // const formattedDate = (date: string) => {
+    //     return new Date(date).toLocaleDateString('it-IT', { month: 'numeric', year: 'numeric' })
 
-    }
+    // }
 
     // const [image, setImage] = useState<File | null>(null)  //oggetto file
 
@@ -133,9 +133,10 @@ const AddExperience = () => {
                                     name="startDate"
                                     value={form.startDate}
                                     onChange={handleInput}
-                                />{
-                                    form.startDate && (<p>{formattedDate(form.startDate)}</p>)
-                                }
+                                />
+                                {/* { */}
+                                {/* form.startDate && (<p>{formattedDate(form.startDate)}</p>) */}
+                                {/* } */}
                             </Form.Group>
                             <Form.Group className="mb-3 w-25 ms-5">
                                 <Form.Label className="fs-5">Data fine</Form.Label>
@@ -145,7 +146,8 @@ const AddExperience = () => {
                                     name="endDate"
                                     value={form.endDate || ""}
                                     onChange={handleInput}
-                                /> {form.endDate && (<p>{formattedDate(form.endDate)}</p>)}
+                                />
+                                {/* formato data corretto! {form.endDate && (<p>{formattedDate(form.endDate)}</p>)} */}
                             </Form.Group>
                         </span>
                         <Form.Group className="mb-3">
