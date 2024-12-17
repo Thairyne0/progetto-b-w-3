@@ -97,7 +97,7 @@ const AddExperience = () => {
 
     return (
         <Row>
-            <Col className="col-7 mx-auto">
+            <Col className="col-4 m-auto shadow p-3 mb-5 bg-body-tertiary rounded justify-content-center d-flex">
                 <Form onSubmit={handleSubmit}>
                     <Form.Group className="mb-3 w-75">
                         <Form.Label className=" fs-5">Ruolo</Form.Label>
@@ -140,7 +140,7 @@ const AddExperience = () => {
                             />
                         </Form.Group>
                     </span>
-                    <Form.Group className="mb-3 w-75">
+                    <Form.Group className="mb-3">
                         <Form.Label className="fs-5">Descrizione</Form.Label>
                         <Form.Control
                             as="textarea"
@@ -190,10 +190,10 @@ const AddExperience = () => {
                 {/* così accetta solo file che sono immagini */}
                     {/* </Form.Group> */}
 
-                    <Button
-                        style={{ backgroundColor: "#378FE9" }}
+                    <Button id="submitButton"
+
                         type="submit"
-                        className="my-4 fw-bold fs-5"
+                        className="my-4 fw-bold pt-2 px-3" style={{ borderRadius: '30px' }}
                     >
                         Submit
                     </Button>

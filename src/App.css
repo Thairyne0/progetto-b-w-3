@@ -1,11 +1,22 @@
 /* sottolineatura al passaggio del mouse (link del footer */
 small:hover {
-    text-decoration: underline;
-  }
+  text-decoration: underline;
+}
 
-  .footer-text {
-    font-size: 0.777rem !important;
-    color:#7c7c7c !important;
-  
-   
-  }
+.footer-text {
+  font-size: 0.777rem !important;
+  color: #7c7c7c !important;
+
+
+}
+
+
+/* button del form AddExperience */
+#submitButton {
+  background-color: #378FE9
+}
+
+#submitButton:hover {
+
+  background-color: #004182
+}
