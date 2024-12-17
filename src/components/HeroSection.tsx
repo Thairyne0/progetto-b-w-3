@@ -90,7 +90,7 @@ const HeroSection = (props:TokenProps) => {
       .catch((error) => {
         console.error(error);
       });
-  }, []);
+  }, [props.token, props.updateProfileData]);
 
   return (
     <>
@@ -98,7 +98,7 @@ const HeroSection = (props:TokenProps) => {
         <div
           className=" rounded-top-3"
           style={{
-            backgroundImage: "url(https://placehold.co/400)",
+            backgroundImage: "url(https://dummyimage.com/600x400/000/fff&text=Hello)",
             height: "200px",
             width: "100%",
             backgroundSize: "cover",
