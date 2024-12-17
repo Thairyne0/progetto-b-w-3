@@ -27,7 +27,8 @@ interface ExperienceProps {
 const CardExperience = (props: ExperienceProps) => {
   return (
     <>
-    <Col>
+    <Row className="justify-content-center mt-3">
+    <Col className="col col-10 col-md-10">
       <Row className="g-2">
         <Col className="col-2 col-md-1 ">
           <img
@@ -46,7 +47,7 @@ const CardExperience = (props: ExperienceProps) => {
         <Col className="col-10 col-md-11">
           <Card.Body>
             <Card.Title className="mb-0">{props.experience.role}</Card.Title>
-            <Card.Text className="text-muted">
+            <Card.Text className="text-muted m-0">
               <small>{props.experience.company}</small>
               <br />
               <small>
@@ -76,12 +77,13 @@ const CardExperience = (props: ExperienceProps) => {
               <br />
               <small>{props.experience.area}</small>
             </Card.Text>
-            <p>{props.experience.description}</p>
+            <p className="m-0">{props.experience.description}</p>
             <Card.Text>Translation, Microsoft Word and +2 skills</Card.Text>
           </Card.Body>
         </Col>
       </Row>
     </Col>
+    </Row>
     <hr />
     </>
   );
