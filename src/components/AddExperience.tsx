@@ -1,5 +1,5 @@
 import { ChangeEvent, useState } from "react";
-import { Button, Col, Form, Row } from "react-bootstrap";
+import { Button, Col, Container, Form, Row } from "react-bootstrap";
 //interfaccia con i campi del form
 interface ExperienceForm {
     role: string;
@@ -96,110 +96,112 @@ const AddExperience = () => {
     };
 
     return (
-        <Row>
-            <Col className="col-4 m-auto shadow p-3 mb-5 bg-body-tertiary rounded justify-content-center d-flex">
-                <Form onSubmit={handleSubmit}>
-                    <Form.Group className="mb-3 w-75">
-                        <Form.Label className=" fs-5">Ruolo</Form.Label>
-                        <Form.Control
-                            type="text"
-                            placeholder="Ruolo ricoperto"
-                            name="role"
-                            value={form.role}
-                            onChange={handleInput}
-                        />
-                    </Form.Group>
-                    <Form.Group className="mb-3 w-75">
-                        <Form.Label className="fs-5">Azienda</Form.Label>
-                        <Form.Control
-                            type="text"
-                            placeholder="Nome azienda"
-                            name="company"
-                            value={form.company}
-                            onChange={handleInput}
-                        />
-                    </Form.Group>
-                    <span className="d-flex">
-                        <Form.Group className="mb-3 w-25">
-                            <Form.Label className="fs-5">Data inizio</Form.Label>
-                            <Form.Control
-                                type="month"
-                                name="startDate"
-                                value={form.startDate}
-                                onChange={handleInput}
-                            />
-                        </Form.Group>
-                        <Form.Group className="mb-3 w-25 ms-5">
-                            <Form.Label className="fs-5">Data fine</Form.Label>
-                            {/* può non avere una fine, metto O stringa vuota */}
-                            <Form.Control
-                                type="month"
-                                name="endDate"
-                                value={form.endDate || ""}
-                                onChange={handleInput}
-                            />
-                        </Form.Group>
-                    </span>
-                    <Form.Group className="mb-3">
-                        <Form.Label className="fs-5">Descrizione</Form.Label>
-                        <Form.Control
-                            as="textarea"
-                            rows={4}
-                            placeholder="I tuoi compiti all'interno dell'azienda"
-                            name="description"
-                            value={form.description}
-                            onChange={handleInput}
-                        />
-                    </Form.Group>
-                    <span className="d-flex align-items-center">
-                        <Form.Group
-                            className="mb-3"
-                            style={{ width: "280px" }}
-                        >
-                            <Form.Label className="fs-5">Sede dell'azienda</Form.Label>
-                            {/* si potrebbe implementare l'api di google per far sì che si possa mettere un indirizzo reale */}
+        <Container fluid>
+            <Row>
+                <Col className="col-5 m-auto shadow p-3 mb-5 bg-body-tertiary rounded justify-content-center d-flex">
+                    <Form onSubmit={handleSubmit} className="w-100">
+                        <Form.Group className="mb-3 w-75">
+                            <Form.Label className=" fs-5">Ruolo</Form.Label>
                             <Form.Control
                                 type="text"
-                                placeholder="Luogo in cui ha sede l'azienda"
-                                name="area"
-                                value={form.area}
+                                placeholder="Ruolo ricoperto"
+                                name="role"
+                                value={form.role}
                                 onChange={handleInput}
                             />
                         </Form.Group>
-                        <Form.Group
-                            className="ms-5 mt-4 align-self-center"
-                            style={{ fontSize: "1.2rem" }}
-                            controlId="formBasicCheckbox"
-                        >
-                            <Form.Check
-                                type="checkbox"
-                                label={
-                                    <span style={{ marginLeft: "5px" }}>
-                                        Ibrido/Smart Working
-                                    </span>
-                                }
-                                name="hybrid"
-                                checked={form.hybrid}
+                        <Form.Group className="mb-3 w-75">
+                            <Form.Label className="fs-5">Azienda</Form.Label>
+                            <Form.Control
+                                type="text"
+                                placeholder="Nome azienda"
+                                name="company"
+                                value={form.company}
                                 onChange={handleInput}
                             />
                         </Form.Group>
-                    </span>
-                    {/* <Form.Group controlId="formFile" className="mb-3">
+                        <span className="d-flex">
+                            <Form.Group className="mb-3 w-25">
+                                <Form.Label className="fs-5">Data inizio</Form.Label>
+                                <Form.Control
+                                    type="month"
+                                    name="startDate"
+                                    value={form.startDate}
+                                    onChange={handleInput}
+                                />
+                            </Form.Group>
+                            <Form.Group className="mb-3 w-25 ms-5">
+                                <Form.Label className="fs-5">Data fine</Form.Label>
+                                {/* può non avere una fine, metto O stringa vuota */}
+                                <Form.Control
+                                    type="month"
+                                    name="endDate"
+                                    value={form.endDate || ""}
+                                    onChange={handleInput}
+                                />
+                            </Form.Group>
+                        </span>
+                        <Form.Group className="mb-3">
+                            <Form.Label className="fs-5">Descrizione</Form.Label>
+                            <Form.Control
+                                as="textarea"
+                                rows={4}
+                                placeholder="I tuoi compiti all'interno dell'azienda"
+                                name="description"
+                                value={form.description}
+                                onChange={handleInput}
+                            />
+                        </Form.Group>
+                        <span className="d-flex align-items-center flex-wrap">
+                            <Form.Group
+                                className="mb-3"
+                                style={{ width: "280px" }}
+                            >
+                                <Form.Label className="fs-5">Sede dell'azienda</Form.Label>
+                                {/* si potrebbe implementare l'api di google per far sì che si possa mettere un indirizzo reale */}
+                                <Form.Control
+                                    type="text"
+                                    placeholder="Luogo in cui ha sede l'azienda"
+                                    name="area"
+                                    value={form.area}
+                                    onChange={handleInput}
+                                />
+                            </Form.Group>
+                            <Form.Group
+                                className="ms-5 mt-4 align-self-center fs-6"
+
+                                controlId="formBasicCheckbox"
+                            >
+                                <span className=""><Form.Check
+                                    type="checkbox"
+                                    label={
+                                        <span className="ms-2">
+                                            Ibrido/Smart Working
+                                        </span>
+                                    }
+                                    name="hybrid"
+                                    checked={form.hybrid}
+                                    onChange={handleInput}
+                                /></span>
+                            </Form.Group>
+                        </span>
+                        {/* <Form.Group controlId="formFile" className="mb-3">
                 <Form.Label>Aggiungi un'immagine</Form.Label>
                 <input type="file" accept="image/*" onChange={handleImageChange} />
                 {/* così accetta solo file che sono immagini */}
-                    {/* </Form.Group> */}
+                        {/* </Form.Group> */}
 
-                    <Button id="submitButton"
+                        <Button id="submitButton"
 
-                        type="submit"
-                        className="my-4 fw-bold pt-2 px-3" style={{ borderRadius: '30px' }}
-                    >
-                        Submit
-                    </Button>
-                </Form>
-            </Col>
-        </Row>
+                            type="submit"
+                            className="my-4 fw-bold pt-2 px-3" style={{ borderRadius: '30px' }}
+                        >
+                            Submit
+                        </Button>
+                    </Form>
+                </Col>
+            </Row>
+        </Container>
     );
 };
 
