@@ -17,7 +17,7 @@ interface  PageAccediProps {
         <Container>
           <Navbar.Brand href="#home">
             <img
-              src="/images/logo.png"
+              src="/images/download.png "
               style={{
                 maxHeight: "70px",
               }}
