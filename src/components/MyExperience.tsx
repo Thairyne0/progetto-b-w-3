@@ -1,19 +1,33 @@
 import { useEffect, useState } from "react";
 import CardExperience from "./CardExperience";
 import IExperience from "../types/Experience";
-import TokenProps from "../types/Hero";
+
 import { Card, Row, Col, Button, } from "react-bootstrap";
+import ProfileData from "../types/profileData";
+
+ 
+interface myExperienceProps{
+    profilo:ProfileData
+    token:string
+}
 
 
-const MyExperience = (props:TokenProps) => {
+const MyExperience = (props:myExperienceProps) => {
   const [experiences, setExperiences] = useState<IExperience[]>([]);
-  
+  console.log("questo", props.token)
 
 //    fetch per trovare le eseprienze dell'utente tramite l'id del profilo
   const getExperience = () => {
     fetch(
-      `https://striveschool-api.herokuapp.com/api/profile/:${props.token}/experiences`
+      `https://striveschool-api.herokuapp.com/api/profile/${props.profilo._id}/experiences`, {
+        headers: {
+            Authorization:
+              `Bearer ${props.token}`,
+        
+          },
+      }
     )
+  
       .then((response) => {
         if (response.ok) {
           return response.json();
