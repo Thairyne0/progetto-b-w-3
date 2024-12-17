@@ -4,6 +4,9 @@ import { useNavigate } from "react-router-dom";
 import TokenProps from "../types/Hero";
 
 const HeroSection = (props:TokenProps) => {
+
+
+
   const imgHeroStyle = {
     borderRadius: "50%",
     width: "9em",
@@ -46,15 +49,7 @@ const HeroSection = (props:TokenProps) => {
   const [hoveredButton1, setHoveredButton1] = useState(false);
   const [hoveredButton2, setHoveredButton2] = useState(false);
 
-  const [profileData, setProfileData] = useState({
-    name: "",
-    surname: "",
-    username: "",
-    bio: "",
-    title: "",
-    area: "",
-    image: "",
-  });
+  
 
   const navigate = useNavigate();
 
@@ -80,7 +75,7 @@ const HeroSection = (props:TokenProps) => {
 
       .then((data) => {
         console.log(data);
-        setProfileData({
+        props.updateProfileData!({
           name: data.name,
           surname: data.surname,
           username: data.username,
@@ -88,6 +83,7 @@ const HeroSection = (props:TokenProps) => {
           title: data.title,
           area: data.area,
           image: data.image,
+          _id:data._id,
         });
       })
 
@@ -115,7 +111,7 @@ const HeroSection = (props:TokenProps) => {
             <img
               style={imgHeroStyle}
               alt="profile-picture"
-              src={profileData.image}
+              src={props.profileData!.image}
             ></img>
             <button style={cameraButtonStyle}>
               <i className="bi bi-camera"></i>
@@ -124,11 +120,11 @@ const HeroSection = (props:TokenProps) => {
         </div>
         <div className="border border-2 p-5 rounded-bottom-3">
           <h1>
-            {profileData.name} {profileData.surname}
+            {props.profileData!.name} {props.profileData!.surname}
           </h1>
-          <h2>{profileData.title}</h2>
-          <p>{profileData.area}</p>
-          <p>{profileData.bio}</p>
+          <h2>{props.profileData!.title}</h2>
+          <p>{props.profileData!.area}</p>
+          <p>{props.profileData!.bio}</p>
           <a
             href="
             #"
