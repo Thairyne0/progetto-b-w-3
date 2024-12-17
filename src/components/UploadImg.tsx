@@ -4,10 +4,11 @@ interface UploadImgProps {
   userId: string;
   apiUrl: string;
   token: string;
-  onSuccess: (data: unknown) => void;
+  onSuccess: (url: string) => void;
   onError: (error: string) => void;
 }
 
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
 const UploadImg: React.FC<UploadImgProps> = ({ userId, apiUrl, token, onSuccess, onError }) => {
   const [selectedImage, setSelectedImage] = useState<File | null>(null);
 
@@ -25,9 +26,9 @@ const UploadImg: React.FC<UploadImgProps> = ({ userId, apiUrl, token, onSuccess,
       }
 
       const formData = new FormData();
-      formData.append('image', selectedImage);
+      formData.append('profile', selectedImage); // 'profile' as per the API requirements
 
-      fetch(`${apiUrl}/profile/${userId}/picture`, {
+      fetch(apiUrl, {
         method: 'POST',
         headers: {
           Authorization: `Bearer ${token}`,
@@ -37,12 +38,13 @@ const UploadImg: React.FC<UploadImgProps> = ({ userId, apiUrl, token, onSuccess,
         .then((response) => {
           if (!response.ok) {
             reject('Failed to upload image');
+            return;
           }
           return response.json();
         })
         .then((data) => {
           resolve();
-          onSuccess(data); // Success callback after successful upload
+          onSuccess(data.imageUrl); // Assuming the API returns the image URL under `imageUrl`
         })
         .catch((error) => {
           reject(error.message || 'An error occurred');
