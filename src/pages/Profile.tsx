@@ -32,7 +32,7 @@ const Profile = (props:TokenProps) => {
         <Container fluid>
           
         <div className="row justify-content-center align-items-top g-0">
-          <div className="col col-12 col-md-8 col-lg-8 d-flex flex-colum align-items-center">
+          <div className="col col-12 col-md-8 col-lg-8 ">
            
             <HeroSection token={props.token} profileData={profileData} 
               updateProfileData={updateProfileData} />
