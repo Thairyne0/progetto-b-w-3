@@ -61,7 +61,7 @@ const AddExperience = ({ userId, token }: AddExperienceProps) => {
 
         try {
             const response = await fetch(
-                `https://striveschool-api.herokuapp.com/api/profile/:${userId}/experiences`,
+                `https://striveschool-api.herokuapp.com/api/profile/${userId}/experiences`,
                 {
                     method: "POST",
                     headers: {
