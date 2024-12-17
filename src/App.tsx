@@ -5,6 +5,7 @@ import PageAccedi from "./components/PageAccedi";
 
 import Profile from "./pages/Profile";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
+import AddExperience from "./components/AddExperience";
 
 function App() {
   // stato
@@ -24,16 +25,17 @@ function App() {
     <>
       <BrowserRouter>
         <Routes>
-          <Route path="/" element={ <PageAccedi
-        token={token}
-        ChangeToken={HandletokenChange}
-        onSubmit={handleSubmit}
-      />} />
+          <Route path="/" element={<PageAccedi
+            token={token}
+            ChangeToken={HandletokenChange}
+            onSubmit={handleSubmit}
+          />} />
           <Route path="/profile" element={<Profile token={token} />} />
           <Route path="/edit-profile" element={<EditProfile></EditProfile>} />
         </Routes>
+        <AddExperience />
       </BrowserRouter>
-     
+
     </>
   );
 }

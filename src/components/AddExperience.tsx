@@ -26,39 +26,41 @@ const AddExperience = () => {
 
     })
 
-    const [image, setImage] = useState<File | null>(null)  //oggetto file
+    // const [image, setImage] = useState<File | null>(null)  //oggetto file
 
     //funzione per caricare l'immagine
-    const handleImageChange = (e: ChangeEvent<HTMLInputElement>) => {
-        if (e.target.files && e.target.files[0]) {
-            setImage(e.target.files[0]);
-        }
-    };
+    // const handleImageChange = (e: ChangeEvent<HTMLInputElement>) => {
+    //     if (e.target.files && e.target.files[0]) {
+    //         setImage(e.target.files[0]);
+    //     }
+    // };
     //crea il formData per inviare i dati (serve per l'invio dei file come immagini) e invia con fetch post
     const handleSubmit = async (e: React.FormEvent) => {
         e.preventDefault()
-        const formData = new FormData();
-        formData.append("role", form.role);
-        formData.append("company", form.company);
-        formData.append("startDate", form.startDate);
-        formData.append("endDate", form.endDate || "");
-        formData.append("description", form.description);
-        formData.append("area", form.area);
-        formData.append("hybrid", form.hybrid.toString())
+        const formDataJson = {
+            role: form.role,
+            company: form.company,
+            startDate: form.startDate,
+            endDate: form.endDate || "",
+            description: form.description,
+            area: form.area,
+            hybrid: form.hybrid.toString()
+        };
+
         //se c'è l'immagine, la metto
-        if (image) {
-            formData.append("image", image);
-        }
+        // if (image) {
+        //     formData.append("image", image);
+        // }
 
 
         try {
-            const response = await fetch('https://striveschool-api.herokuapp.com/api/profile/:userId/experiences', {
+            const response = await fetch('https://striveschool-api.herokuapp.com/api/profile/:675fe42a0ea286001528b928/experiences', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
-                    'Authorization': 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NzYwNDA0YTBlYTI4NjAwMTUyOGI5NjkiLCJpYXQiOjE3MzQzNjExNjIsImV4cCI6MTczNTU3MDc2Mn0.8TjyYQRYtNsiPmjF9yNjLl5vAhFkkg2SpoSrjwrFVE0'
+                    Authorization: 'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NzYxMzM4Zjc0YTg2ODAwMTVkYjU1MDgiLCJpYXQiOjE3MzQ0MjM0MzksImV4cCI6MTczNTYzMzAzOX0.FDictyrEQTuSrwL-vVijXHNmMtJuNlp5cdGtobh4suY'
                 },
-                body: formData,
+                body: JSON.stringify(formDataJson)
             })
 
 
@@ -90,7 +92,7 @@ const AddExperience = () => {
         setForm((form) => ({
             ...form,
 
-            //tra quadre significa che uso il valore della variabile come nome della proprietà: il tipo della proprietà è checkbox? se sì, scrivi il suo valore
+            //tra quadre significa che uso il valore della variabile come nome della proprietà: la proprietà è checkbox? è selezionata(checked)? se sì, riporta il suo valore nello stato
             [name]: type === 'checkbox' ? checked : value
         }))
 
@@ -126,11 +128,11 @@ const AddExperience = () => {
             </Form.Group>
             <Form.Group className="mb-3" controlId="formBasicCheckbox">
                 <Form.Check type="checkbox" label="Ibrido/Smart Working" name="hybrid" checked={form.hybrid} onChange={handleInput} /></Form.Group>
-            <Form.Group controlId="formFile" className="mb-3">
+            {/* <Form.Group controlId="formFile" className="mb-3">
                 <Form.Label>Aggiungi un'immagine</Form.Label>
                 <input type="file" accept="image/*" onChange={handleImageChange} />
                 {/* così accetta solo file che sono immagini */}
-            </Form.Group>
+            {/* </Form.Group> */}
 
             <Button variant="primary" type="submit">
                 Submit
