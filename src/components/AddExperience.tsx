@@ -1,6 +1,6 @@
 import { ChangeEvent, useState } from "react"
 import { Button, Form } from "react-bootstrap"
-
+//interfaccia con i campi del form
 interface ExperienceForm {
     role: string,
     company: string,
@@ -13,7 +13,7 @@ interface ExperienceForm {
 }
 
 const AddExperience = () => {
-
+    //tipo dello stato è l'interface, imposto i valori iniziali
     const [form, setForm] = useState<ExperienceForm>({
 
         role: '',
@@ -26,15 +26,15 @@ const AddExperience = () => {
 
     })
 
-    const [image, setImage] = useState<File | null>(null),  //oggetto file
+    const [image, setImage] = useState<File | null>(null)  //oggetto file
 
-
+    //funzione per caricare l'immagine
     const handleImageChange = (e: ChangeEvent<HTMLInputElement>) => {
         if (e.target.files && e.target.files[0]) {
             setImage(e.target.files[0]);
         }
     };
-    //deve fare una post 
+    //crea il formData per inviare i dati (serve per l'invio dei file come immagini) e invia con fetch post
     const handleSubmit = async (e: React.FormEvent) => {
         e.preventDefault()
         const formData = new FormData();
@@ -63,7 +63,7 @@ const AddExperience = () => {
 
 
             if (response.ok) {
-
+                //resetta il form
                 setForm({
                     role: '',
                     company: '',
@@ -82,7 +82,7 @@ const AddExperience = () => {
     }
 
 
-
+    //gestisce i campi input del form (quando vengono modificati). Aggiorna lo stato a ogni modifica.
 
     const handleInput = (e: ChangeEvent<HTMLInputElement>) => {
         // name è role
@@ -90,7 +90,7 @@ const AddExperience = () => {
         setForm((form) => ({
             ...form,
 
-
+            //tra quadre significa che uso il valore della variabile come nome della proprietà: il tipo della proprietà è checkbox? se sì, scrivi il suo valore
             [name]: type === 'checkbox' ? checked : value
         }))
 
