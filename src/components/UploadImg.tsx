@@ -26,7 +26,7 @@ const UploadImg: React.FC<UploadImgProps> = ({ userId, apiUrl, token, onSuccess,
       }
 
       const formData = new FormData();
-      formData.append('profile', selectedImage); // 'profile' as per the API requirements
+      formData.append('profile', selectedImage); 
 
       fetch(apiUrl, {
         method: 'POST',
@@ -44,7 +44,7 @@ const UploadImg: React.FC<UploadImgProps> = ({ userId, apiUrl, token, onSuccess,
         })
         .then((data) => {
           resolve();
-          onSuccess(data.imageUrl); // Assuming the API returns the image URL under `imageUrl`
+          onSuccess(data.imageUrl); 
         })
         .catch((error) => {
           reject(error.message || 'An error occurred');
