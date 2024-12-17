@@ -15,6 +15,7 @@ interface myExperienceProps{
 const MyExperience = (props:myExperienceProps) => {
   const [experiences, setExperiences] = useState<IExperience[]>([]);
   console.log("questo", props.token)
+  console.log("questo", props.profilo._id)
 
 //    fetch per trovare le eseprienze dell'utente tramite l'id del profilo
   const getExperience = () => {
@@ -46,7 +47,7 @@ const MyExperience = (props:myExperienceProps) => {
 
   useEffect(() => {
     getExperience();
-  }, []);
+  }, [props.profilo._id]);
 
   return (
     <>
