@@ -1,9 +1,12 @@
 import "bootstrap-icons/font/bootstrap-icons.css";
-import { useState, useEffect, } from "react";
-import { useNavigate } from 'react-router-dom';
+import { useState, useEffect } from "react";
+import { useNavigate } from "react-router-dom";
+import TokenProps from "../types/Hero";
+
+const HeroSection = (props:TokenProps) => {
 
 
-const HeroSection = () => {
+
   const imgHeroStyle = {
     borderRadius: "50%",
     width: "9em",
@@ -46,29 +49,19 @@ const HeroSection = () => {
   const [hoveredButton1, setHoveredButton1] = useState(false);
   const [hoveredButton2, setHoveredButton2] = useState(false);
 
-  const [profileData, setProfileData] = useState({
-    name: '',
-    surname: '',
-    username: '',
-    bio: '',
-    title: '',
-    area: '',
-    image: '',   
-
-  })
-
+  
 
   const navigate = useNavigate();
 
   const handleEditProfile = () => {
-    navigate('/edit-profile');
+    navigate("/edit-profile");
   };
 
   useEffect(() => {
     fetch("https://striveschool-api.herokuapp.com/api/profile/me", {
       headers: {
         Authorization:
-          "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NzVmZTQyYTBlYTI4NjAwMTUyOGI5MjgiLCJpYXQiOjE3MzQzNDgyMDIsImV4cCI6MTczNTU1NzgwMn0.SJckLJO8QVlGPUJQYCZM4ftYV_vnB58ae91FqnJcb6o", // Your token
+          `Bearer ${props.token}`, // Your token
         "Content-Type": "application/json",
       },
     })
@@ -82,15 +75,16 @@ const HeroSection = () => {
 
       .then((data) => {
         console.log(data);
-        setProfileData({
-            name: data.name,
-            surname: data.surname,
-            username: data.username,
-            bio: data.bio,
-            title: data.title,
-            area: data.area,
-            image: data.image,  
-        })
+        props.updateProfileData!({
+          name: data.name,
+          surname: data.surname,
+          username: data.username,
+          bio: data.bio,
+          title: data.title,
+          area: data.area,
+          image: data.image,
+          _id:data._id,
+        });
       })
 
       .catch((error) => {
@@ -100,8 +94,9 @@ const HeroSection = () => {
 
   return (
     <>
-      <section className="m-5">
+      <section className="mt-3 col col-12 col-md-11 col-lg-11 bg-white rounded-3 ">
         <div
+          className=" rounded-top-3"
           style={{
             backgroundImage: "url(https://placehold.co/400)",
             height: "200px",
@@ -116,18 +111,20 @@ const HeroSection = () => {
             <img
               style={imgHeroStyle}
               alt="profile-picture"
-              src={profileData.image}
+              src={props.profileData!.image}
             ></img>
             <button style={cameraButtonStyle}>
               <i className="bi bi-camera"></i>
             </button>
           </div>
         </div>
-        <div className="border border-2 p-5 ">
-          <h1>{profileData.name} {profileData.surname}</h1>
-          <h2>{profileData.title}</h2>
-          <p>{profileData.area}</p>
-          <p>{profileData.bio}</p>
+        <div className="border border-2 p-5 rounded-bottom-3">
+          <h1>
+            {props.profileData!.name} {props.profileData!.surname}
+          </h1>
+          <h2>{props.profileData!.title}</h2>
+          <p>{props.profileData!.area}</p>
+          <p>{props.profileData!.bio}</p>
           <a
             href="
             #"

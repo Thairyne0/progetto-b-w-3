@@ -26,7 +26,9 @@ interface ExperienceProps {
 
 const CardExperience = (props: ExperienceProps) => {
   return (
-    <Col>
+    <>
+    <Row className="justify-content-center mt-3">
+    <Col className="col col-10 col-md-10">
       <Row className="g-2">
         <Col className="col-2 col-md-1 ">
           <img
@@ -45,50 +47,45 @@ const CardExperience = (props: ExperienceProps) => {
         <Col className="col-10 col-md-11">
           <Card.Body>
             <Card.Title className="mb-0">{props.experience.role}</Card.Title>
-            <Card.Text className="text-muted">
+            <Card.Text className="text-muted m-0">
               <small>{props.experience.company}</small>
               <br />
               <small>
-                {props.experience.startDate} -
-                {props.experience.endDate
-                  ? props.experience.endDate
-                  : "Present"}
-                ·
-                {Math.floor(
-                  Math.abs(
-                    new Date(props.experience.endDate || new Date()).getTime() -
-                      new Date(props.experience.startDate).getTime()
-                  ) /
-                    (1000 * 3600 * 24 * 30)
-                ) < 12
-                  ? `${Math.floor(
-                      Math.abs(
-                        new Date(
-                          props.experience.endDate || new Date()
-                        ).getTime() -
-                          new Date(props.experience.startDate).getTime()
-                      ) /
-                        (1000 * 3600 * 24 * 30)
-                    )} months`
-                  : `${Math.floor(
-                      Math.abs(
-                        new Date(
-                          props.experience.endDate || new Date()
-                        ).getTime() -
-                          new Date(props.experience.startDate).getTime()
-                      ) /
-                        (1000 * 3600 * 24 * 365)
-                    )} yrs`}
+              {props.experience.company}
+                <br />
+              
+                {new Intl.DateTimeFormat('en-US', { year: 'numeric', month: 'short' }).format(new Date(props.experience.startDate))} - 
+                {new Intl.DateTimeFormat('en-US', { year: 'numeric', month: 'short' }).format(new Date(props.experience.endDate || new Date()))} ·
+
+                
+                {(() => {
+                  const start = new Date(props.experience.startDate);
+                  const end = props.experience.endDate ? new Date(props.experience.endDate) : new Date();
+                  const months = Math.floor((end.getTime() - start.getTime()) / (1000 * 3600 * 24 * 30));
+                  const years = Math.floor(months / 12);
+                  const remainingMonths = months % 12;
+
+                  if (years > 0) {
+                    return `${years} yr${years > 1 ? 's' : ''}`;
+                  } else if (remainingMonths > 0) {
+                    return `${remainingMonths} month${remainingMonths > 1 ? 's' : ''}`;
+                  } else {
+                    return '0 months';
+                  }
+                })()}
               </small>
               <br />
               <small>{props.experience.area}</small>
             </Card.Text>
-            <p>{props.experience.description}</p>
+            <p className="m-0">{props.experience.description}</p>
             <Card.Text>Translation, Microsoft Word and +2 skills</Card.Text>
           </Card.Body>
         </Col>
       </Row>
     </Col>
+    </Row>
+    <hr />
+    </>
   );
 };
 
