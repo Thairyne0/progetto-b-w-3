@@ -11,7 +11,12 @@ interface ExperienceForm {
     hybrid: boolean;
 }
 
-const AddExperience = () => {
+interface AddExperienceProps {
+    userId: string,
+    token: string
+}
+
+const AddExperience = ({ userId, token }: AddExperienceProps) => {
     //tipo dello stato è l'interface, imposto i valori iniziali
     const [form, setForm] = useState<ExperienceForm>({
         role: "",
@@ -56,13 +61,13 @@ const AddExperience = () => {
 
         try {
             const response = await fetch(
-                "https://striveschool-api.herokuapp.com/api/profile/:675fe42a0ea286001528b928/experiences",
+                `https://striveschool-api.herokuapp.com/api/profile/:${userId}/experiences`,
                 {
                     method: "POST",
                     headers: {
                         "Content-Type": "application/json",
                         Authorization:
-                            "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NzYxMzM4Zjc0YTg2ODAwMTVkYjU1MDgiLCJpYXQiOjE3MzQ0MjM0MzksImV4cCI6MTczNTYzMzAzOX0.FDictyrEQTuSrwL-vVijXHNmMtJuNlp5cdGtobh4suY",
+                            `Bearer ${token}`,
                     },
                     body: JSON.stringify(formDataJson),
                 }
