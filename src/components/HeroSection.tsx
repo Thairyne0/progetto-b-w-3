@@ -94,7 +94,7 @@ const HeroSection = (props:TokenProps) => {
 
   return (
     <>
-      <section className="m-0 mt-5 m-md-5 bg-white rounded-3">
+      <section className="mt-3 col col-12 col-md-11 col-lg-11 bg-white rounded-3 ">
         <div
           className=" rounded-top-3"
           style={{
