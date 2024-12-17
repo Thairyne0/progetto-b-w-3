@@ -3,10 +3,7 @@ import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import TokenProps from "../types/Hero";
 
-const HeroSection = (props:TokenProps) => {
-
-
-
+const HeroSection = (props: TokenProps) => {
   const imgHeroStyle = {
     borderRadius: "50%",
     width: "9em",
@@ -49,8 +46,6 @@ const HeroSection = (props:TokenProps) => {
   const [hoveredButton1, setHoveredButton1] = useState(false);
   const [hoveredButton2, setHoveredButton2] = useState(false);
 
-  
-
   const navigate = useNavigate();
 
   const handleEditProfile = () => {
@@ -60,8 +55,7 @@ const HeroSection = (props:TokenProps) => {
   useEffect(() => {
     fetch("https://striveschool-api.herokuapp.com/api/profile/me", {
       headers: {
-        Authorization:
-          `Bearer ${props.token}`, // Your token
+        Authorization: `Bearer ${props.token}`, // Your token
         "Content-Type": "application/json",
       },
     })
@@ -83,14 +77,15 @@ const HeroSection = (props:TokenProps) => {
           title: data.title,
           area: data.area,
           image: data.image,
-          _id:data._id,
+          _id: data._id,
         });
       })
 
       .catch((error) => {
         console.error(error);
       });
-  }, [props.token, props.updateProfileData]);
+  }, []);
+  // [props.token, props.updateProfileData]
 
   return (
     <>
@@ -98,7 +93,8 @@ const HeroSection = (props:TokenProps) => {
         <div
           className=" rounded-top-3"
           style={{
-            backgroundImage: "url(https://dummyimage.com/600x400/000/fff&text=Hello)",
+            backgroundImage:
+              "url(https://dummyimage.com/600x400/000/fff&text=Hello)",
             height: "200px",
             width: "100%",
             backgroundSize: "cover",
