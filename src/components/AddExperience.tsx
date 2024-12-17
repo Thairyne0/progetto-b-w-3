@@ -90,7 +90,7 @@ const AddExperience = () => {
         setForm((form) => ({
             ...form,
 
-            //tra quadre significa che uso il valore della variabile come nome della proprietà: il tipo della proprietà è checkbox? se sì, scrivi il suo valore
+            //tra quadre significa che uso il valore della variabile come nome della proprietà: la proprietà è checkbox? è selezionata(checked)? se sì, riporta il suo valore nello stato
             [name]: type === 'checkbox' ? checked : value
         }))
 
