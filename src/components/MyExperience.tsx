@@ -6,9 +6,10 @@ import { useNavigate } from "react-router-dom";
 
 import ProfileData from "../types/profileData";
 import { Button, Card, Col, Row } from "react-bootstrap";
+// import { Button, Card, Col, Row } from "react-bootstrap";
 
 interface myExperienceProps {
-  profilo: ProfileData ;
+  profilo: ProfileData;
   token: string | null;
 
 }
@@ -57,6 +58,15 @@ const MyExperience = (props: myExperienceProps) => {
     setExperiences(experiences.filter((experience) => experience._id !== id));
   };
 
+  const handleEditExperience = (updatedExperience: IExperience) => {
+    setExperiences((prevExperiences) =>
+      prevExperiences.map((exp) =>
+        exp._id === updatedExperience._id ? updatedExperience : exp
+      )
+    );
+  };
+
+
 
   return (
     <>
@@ -102,6 +112,7 @@ const MyExperience = (props: myExperienceProps) => {
             token={props.token}
             profileId={props.profilo._id}
             onDelete={handleDeleteExperience}
+            onEdit={handleEditExperience}
           />
         }
         )}

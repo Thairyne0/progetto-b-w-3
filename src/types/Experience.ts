@@ -11,5 +11,6 @@ interface IExperience{
     updatedAt: string;
     __v: number;
     _id: string;
+    hybrid: boolean
   }
   export default IExperience
