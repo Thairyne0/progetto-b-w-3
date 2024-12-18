@@ -190,7 +190,7 @@ const AddExperience = ({ userId, token }: AddExperienceProps) => {
                 <UploadImg
                   //https://striveschool-api.herokuapp.com/api/profile/%7BuserId%7D/experiences/:expId/picture
                   userId={userId}
-                  apiUrl={`https://striveschool-api.herokuapp.com/api/profile/${userId}/experiences/:expId/picture`} // Provide the correct API URL
+                  apiUrl={`https://striveschool-api.herokuapp.com/api/profile/${userId}/experiences/:expId/picture`} 
                   token={token}
                   onSuccess={handleImageSuccess}
                   onError={handleImageError}

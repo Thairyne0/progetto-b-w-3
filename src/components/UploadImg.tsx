@@ -8,7 +8,6 @@ interface UploadImgProps {
   onError: (error: string) => void;
 }
 
-// eslint-disable-next-line @typescript-eslint/no-unused-vars
 const UploadImg: React.FC<UploadImgProps> = ({
   apiUrl,
   token,
