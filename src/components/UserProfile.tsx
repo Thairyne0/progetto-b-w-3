@@ -79,7 +79,7 @@ const UserProfile: React.FC = () => {
           <p className="mt-2" style={{ fontSize: "14px" }}>
             <FontAwesomeIcon icon={faSquare} />{" "}
             <a
-              href="#reactivate"  // Puoi modificare questo link per fare una navigazione vera o aggiungere una logica per l'azione
+              href="#"  
               style={{
                 color: "orange",
                 textDecoration: "none",
