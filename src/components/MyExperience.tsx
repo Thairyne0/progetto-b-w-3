@@ -6,7 +6,7 @@ import { useNavigate } from "react-router-dom";
 
 import ProfileData from "../types/profileData";
 import { Button, Card, Col, Row } from "react-bootstrap";
-// import { Button, Card, Col, Row } from "react-bootstrap";
+
 
 interface myExperienceProps {
   profilo: ProfileData;
@@ -57,7 +57,7 @@ const MyExperience = (props: myExperienceProps) => {
   const handleDeleteExperience = (id: string) => {
     setExperiences(experiences.filter((experience) => experience._id !== id));
   };
-  //mappa le esperienze, se l'id corrisponde a quello dell'esperienza aggiornata, la sostituisce, altrimenti non fa niente. handleEditExperience è passata al figlio come onEdit
+  //mappa le esperienze, se l'id corrisponde a quello dell'esperienza aggiornata, la sostituisce, altrimenti non fa niente. handleEditExperience è passata al figlio (CardExperience) come onEdit
   const handleEditExperience = (updatedExperience: IExperience) => {
     setExperiences((prevExperiences) =>
       prevExperiences.map((exp) =>
