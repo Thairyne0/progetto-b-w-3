@@ -3,6 +3,7 @@ import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import TokenProps from "../types/Hero";
 
+
 const HeroSection = (props: TokenProps) => {
   const imgHeroStyle = {
     borderRadius: "50%",
@@ -45,6 +46,7 @@ const HeroSection = (props: TokenProps) => {
 
   const [hoveredButton1, setHoveredButton1] = useState(false);
   const [hoveredButton2, setHoveredButton2] = useState(false);
+  
 
   const navigate = useNavigate();
 
@@ -83,13 +85,16 @@ const HeroSection = (props: TokenProps) => {
       })
 
       .catch((error) => {
-        console.error(error);
+        console.error(error)
+       props.handleAlert!(true)
+          
       });
   }, []);
   // [props.token, props.updateProfileData]
 
   return (
     <>
+     
       <section className="mt-3 col col-12 col-md-11 col-lg-11 bg-white rounded-3 ">
         <div
           className=" rounded-top-3"
