@@ -3,12 +3,14 @@ import CardExperience from "./CardExperience";
 import IExperience from "../types/Experience";
 import { useNavigate } from "react-router-dom";
 
-import { Card, Row, Col, Button } from "react-bootstrap";
+
 import ProfileData from "../types/profileData";
+import { Button, Card, Col, Row } from "react-bootstrap";
 
 interface myExperienceProps {
   profilo: ProfileData;
-  token: string|null;
+  token: string | null;
+
 }
 
 const MyExperience = (props: myExperienceProps) => {
@@ -51,6 +53,11 @@ const MyExperience = (props: myExperienceProps) => {
     getExperience();
   }, [props.profilo._id]);
 
+  const handleDeleteExperience = (id: string) => {
+    setExperiences(experiences.filter((experience) => experience._id !== id));
+  };
+
+
   return (
     <>
       <section className="  mt-3 col col-12 col-md-11 col-lg-11 bg-white rounded-3 ">
@@ -88,9 +95,16 @@ const MyExperience = (props: myExperienceProps) => {
           </Col>
         </Row>
 
-        {experiences.map((e) => {
-          return <CardExperience experience={e} />;
-        })}
+        {experiences.map((experience) => {
+          return <CardExperience
+            key={experience._id}
+            experience={experience}
+            token={props.token}
+            profileId={props.profilo._id}
+            onDelete={handleDeleteExperience}
+          />
+        }
+        )}
       </section>
     </>
   );

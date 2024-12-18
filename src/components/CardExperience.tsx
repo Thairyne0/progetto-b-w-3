@@ -1,5 +1,6 @@
-import { Col, Row, Card } from "react-bootstrap";
+import { Col, Row, Card, Button } from "react-bootstrap";
 import IExperience from "../types/Experience";
+import { useNavigate } from "react-router-dom";
 
 // {
 //     "role": "Full Stack Web Developer",
@@ -20,9 +21,41 @@ import IExperience from "../types/Experience";
 
 interface ExperienceProps {
   experience: IExperience;
+  token: string | null;
+  profileId: string;
+  onDelete: (experienceId: string) => void;
 }
 
 const CardExperience = (props: ExperienceProps) => {
+  const navigate = useNavigate()
+
+  const handleEdit = () => {
+    navigate(`/edit-profile/`)
+  }
+
+
+  //metodo delete per eliminare l'esperienza
+  const handleDelete = async () => {
+    if (props.token) {
+      const response = await fetch(`https://striveschool-api.herokuapp.com/api/profile/${props.profileId}/experiences/${props.experience._id}`, {
+        method: 'DELETE',
+        headers: {
+          "Content-Type": 'application/json',
+          Authorization: `Bearer ${props.token}`
+        },
+
+      })
+
+      if (response.ok) {
+        //creo un nuovo array con filter in cui metto solo gli elementi che non hanno lo stesso id derll'esperienza che voglio eliminare
+        //aggiorno lo stato con quel nuovo array
+        props.onDelete(props.experience._id)
+      } else { throw new Error("Errore nell'eliminazione dell'esperienza") }
+
+    }
+  }
+
+
   return (
     <>
       <Row className="justify-content-center mt-3">
@@ -44,7 +77,12 @@ const CardExperience = (props: ExperienceProps) => {
             </Col>
             <Col className="col-10 col-md-11">
               <Card.Body>
-                <Card.Title className="mb-0">
+                <Button onClick={() => handleEdit()}>
+                  Modifica esperienza
+                </Button>
+                <Button variant="danger" onClick={handleDelete}>
+                  Elimina esperienza
+                </Button><Card.Title className="mb-0">
                   {props.experience.role}
                 </Card.Title>
                 <Card.Text className="text-muted m-0">
