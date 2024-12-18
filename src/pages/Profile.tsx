@@ -1,4 +1,4 @@
-import { useState } from "react";
+
 import HeroSection from "../components/HeroSection";
 import MyExperience from "../components/MyExperience";
 import MyFooter from "../components/MyFooter";
@@ -8,19 +8,6 @@ import TokenProps from "../types/Hero";
 import { Container } from "react-bootstrap";
 
 const Profile = (props: TokenProps) => {
-  const [profileData, setProfileData] = useState({
-    name: "",
-    surname: "",
-    username: "",
-    bio: "",
-    title: "",
-    area: "",
-    image: "",
-    _id: "",
-  });
-  const updateProfileData = (newData: Partial<typeof profileData>) => {
-    setProfileData((prevData) => ({ ...prevData, ...newData }));
-  };
 
   return (
     <div>
@@ -33,11 +20,11 @@ const Profile = (props: TokenProps) => {
             <div className="col col-12 col-md-8 col-lg-8 ">
               <HeroSection
                 token={props.token}
-                profileData={profileData}
-                updateProfileData={updateProfileData}
+                profileData={props.profileData}
+                updateProfileData={props.updateProfileData}
                 handleAlert={props.handleAlert}
               />
-              <MyExperience profilo={profileData}  token={localStorage.getItem("userToken")} />
+              <MyExperience profilo={props.profileData}  token={localStorage.getItem("userToken")} />
             </div>
             <div className=" col col-12 col-md-4 col-lg-4 mt-3">
               <ContactsList></ContactsList>

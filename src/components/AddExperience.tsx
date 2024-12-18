@@ -4,6 +4,8 @@ import { Button, Col, Container, Form, Row } from "react-bootstrap";
 import UploadImg from "./UploadImg";
 import MyNewNavBar from "./MyNewNavBar";
 
+import { useNavigate} from "react-router-dom";
+
 // Interface with form fields
 interface ExperienceForm {
   role: string;
@@ -22,6 +24,8 @@ interface AddExperienceProps {
 }
 
 const AddExperience = ({ userId, token }: AddExperienceProps) => {
+
+  const navigate=useNavigate()
   // Set the initial state of the form including imageUrl
   const [form, setForm] = useState<ExperienceForm>({
     role: "",
@@ -46,7 +50,7 @@ const AddExperience = ({ userId, token }: AddExperienceProps) => {
       area: form.area,
       hybrid: form.hybrid.toString(),
       imageUrl: form.imageUrl || "", // Send image URL if available
-    };
+      };
 
     try {
       const response = await fetch(
@@ -73,12 +77,14 @@ const AddExperience = ({ userId, token }: AddExperienceProps) => {
           hybrid: false,
           imageUrl: null,
         });
+        navigate("/profile")
       } else {
         throw new Error("Errore nel caricamento dell'esperienza");
       }
     } catch (error) {
       console.log(error);
     }
+
   };
 
   // Gestisce i campi input del form (quando vengono modificati). Aggiorna lo stato a ogni modifica.
@@ -195,15 +201,17 @@ const AddExperience = ({ userId, token }: AddExperienceProps) => {
                   onSuccess={handleImageSuccess}
                   onError={handleImageError}
                 />
-
+                
                 <Button
                   id="submitButton"
                   type="submit"
                   className="my-4 fw-bold pt-2 px-3"
                   style={{ borderRadius: "30px" }}
+
                 >
                   Submit
                 </Button>
+               
               </Form>
             </Col>
           </Row>

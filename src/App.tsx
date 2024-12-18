@@ -13,6 +13,21 @@ function App() {
   // stato
   const [token, settoken] = useState<string>("");
   const [alert, setAlert] = useState<boolean>(false);
+  const [profileData, setProfileData] = useState({
+    name: "",
+    surname: "",
+    username: "",
+    bio: "",
+    title: "",
+    area: "",
+    image: "",
+    _id: "",
+  });
+  
+  const updateProfileData = (newData: Partial<typeof profileData>) => {
+    setProfileData((prevData) => ({ ...prevData, ...newData }));
+  };
+
 
 
   // funzione per l'alert
@@ -55,11 +70,12 @@ function App() {
               />
             }
           />
-          <Route path="/profile" element={<Profile handleAlert={handleAlert} token={localStorage.getItem("userToken")} />} />
+          <Route path="/profile" element={<Profile handleAlert={handleAlert} token={localStorage.getItem("userToken")}   profileData={profileData}
+                updateProfileData={updateProfileData} />} />
           <Route path="/edit-profile" element={<EditProfile></EditProfile>} />
           <Route
             path="/add-experience"
-            element={<AddExperience token={localStorage.getItem("userToken")} userId="userId" />}
+            element={<AddExperience token={localStorage.getItem("userToken")} userId={profileData._id} />}
           />
           <Route path="/home" element={<Homepage></Homepage>} />
         </Routes>

@@ -8,7 +8,7 @@ import ProfileData from "../types/profileData";
 import { Button, Card, Col, Row } from "react-bootstrap";
 
 interface myExperienceProps {
-  profilo: ProfileData;
+  profilo: ProfileData ;
   token: string | null;
 
 }
