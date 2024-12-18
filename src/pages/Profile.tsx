@@ -36,7 +36,7 @@ const Profile = (props: TokenProps) => {
                 profileData={profileData}
                 updateProfileData={updateProfileData}
               />
-              <MyExperience profilo={profileData} token={props.token} />
+              <MyExperience profilo={profileData}  token={localStorage.getItem("userToken")} />
             </div>
             <div className=" col col-12 col-md-4 col-lg-4 mt-3">
               <ContactsList></ContactsList>

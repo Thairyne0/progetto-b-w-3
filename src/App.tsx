@@ -12,9 +12,12 @@ function App() {
   // stato
   const [token, settoken] = useState<string>("");
 
+
+
   //  funzione per cambiare lo stato di key
   const HandletokenChange = (value: string) => {
-    settoken(value);
+    settoken(value)
+    localStorage.setItem("userToken", value);
   };
 
   // funzione per inviare il form
@@ -36,7 +39,7 @@ function App() {
               />
             }
           />
-          <Route path="/profile" element={<Profile token={token} />} />
+          <Route path="/profile" element={<Profile token={localStorage.getItem("userToken")} />} />
           <Route path="/edit-profile" element={<EditProfile></EditProfile>} />
           <Route
             path="/add-experience"

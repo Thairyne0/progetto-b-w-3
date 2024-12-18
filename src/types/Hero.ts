@@ -3,7 +3,7 @@ import ProfileData from "./profileData";
 
 
 interface TokenProps {
-    token:string;
+    token:string|null;
    
     updateProfileData?: (newData: Partial<ProfileData>) => void;
     profileData?:ProfileData
