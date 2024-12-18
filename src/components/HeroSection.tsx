@@ -53,6 +53,7 @@ const HeroSection = (props: TokenProps) => {
   };
 
   useEffect(() => {
+    
     fetch("https://striveschool-api.herokuapp.com/api/profile/me", {
       headers: {
         Authorization: `Bearer ${props.token}`, 

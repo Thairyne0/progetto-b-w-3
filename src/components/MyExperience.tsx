@@ -8,7 +8,7 @@ import ProfileData from "../types/profileData";
 
 interface myExperienceProps {
   profilo: ProfileData;
-  token: string;
+  token: string|null;
 }
 
 const MyExperience = (props: myExperienceProps) => {
