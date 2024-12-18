@@ -8,8 +8,8 @@ interface UploadImgProps {
   onError: (error: string) => void;
 }
 
-// eslint-disable-next-line @typescript-eslint/no-unused-vars
-const UploadImg: React.FC<UploadImgProps> = ({ userId, apiUrl, token, onSuccess, onError }) => {
+
+const UploadImg: React.FC<UploadImgProps> = ({  apiUrl, token, onSuccess, onError }) => {
   const [selectedImage, setSelectedImage] = useState<File | null>(null);
 
   const handleImageChange = (e: React.ChangeEvent<HTMLInputElement>) => {
