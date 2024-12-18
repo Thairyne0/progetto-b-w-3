@@ -53,11 +53,11 @@ const MyExperience = (props: myExperienceProps) => {
   useEffect(() => {
     getExperience();
   }, [props.profilo._id]);
-
+  //filtra le esperienze e restituisce un array senza l'esperienza eliminata
   const handleDeleteExperience = (id: string) => {
     setExperiences(experiences.filter((experience) => experience._id !== id));
   };
-
+  //mappa le esperienze, se l'id corrisponde a quello dell'esperienza aggiornata, la sostituisce, altrimenti non fa niente. handleEditExperience è passata al figlio come onEdit
   const handleEditExperience = (updatedExperience: IExperience) => {
     setExperiences((prevExperiences) =>
       prevExperiences.map((exp) =>
