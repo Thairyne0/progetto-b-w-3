@@ -76,13 +76,13 @@ const CardExperience = (props: ExperienceProps) => {
               />
             </Col>
             <Col className="col-10 col-md-11">
-              <Card.Body>
-                <Button onClick={() => handleEdit()}>
-                  Modifica esperienza
+              <Card.Body className="d-flex flex-column">
+                <span className="align-self-end justify-content-center"><Button style={{ backgroundColor: "transparent" }} className="small p-1 border-0 me-2" onClick={() => handleEdit()}>
+                  <i className="bi bi-pencil-square text-black fs-5"></i>
                 </Button>
-                <Button variant="danger" onClick={handleDelete}>
-                  Elimina esperienza
-                </Button><Card.Title className="mb-0">
+                  <Button style={{ backgroundColor: "transparent" }} className="small p-1 border-0" onClick={handleDelete}>
+                    <i className="bi bi-trash3 text-black fs-5"></i>
+                  </Button></span><Card.Title className="mb-0">
                   {props.experience.role}
                 </Card.Title>
                 <Card.Text className="text-muted m-0">
