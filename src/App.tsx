@@ -23,22 +23,19 @@ function App() {
     image: "",
     _id: "",
   });
-  
+
   const updateProfileData = (newData: Partial<typeof profileData>) => {
     setProfileData((prevData) => ({ ...prevData, ...newData }));
   };
 
-
-
   // funzione per l'alert
   const handleAlert = (status: boolean) => {
-    setAlert(status)
-  }
-
+    setAlert(status);
+  };
 
   //  funzione per cambiare lo stato di key
   const HandletokenChange = (value: string) => {
-    settoken(value)
+    settoken(value);
     localStorage.setItem("userToken", value);
   };
 
@@ -47,14 +44,11 @@ function App() {
     event.preventDefault();
   };
 
-
   return (
     <>
       <BrowserRouter>
         {alert && (
-          <Alert variant="danger">
-            Il token inserito non è valido!
-          </Alert>
+          <Alert variant="danger">Il token inserito non è valido!</Alert>
         )}
         <Routes>
           <Route
@@ -65,17 +59,30 @@ function App() {
                 alert={alert}
                 token={token}
                 ChangeToken={HandletokenChange}
-
                 onSubmit={handleSubmit}
               />
             }
           />
-          <Route path="/profile" element={<Profile handleAlert={handleAlert} token={localStorage.getItem("userToken")}   profileData={profileData}
-                updateProfileData={updateProfileData} />} />
+          <Route
+            path="/profile"
+            element={
+              <Profile
+                handleAlert={handleAlert}
+                token={localStorage.getItem("userToken")}
+                profileData={profileData}
+                updateProfileData={updateProfileData}
+              />
+            }
+          />
           <Route path="/edit-profile" element={<EditProfile></EditProfile>} />
           <Route
             path="/add-experience"
-            element={<AddExperience token={localStorage.getItem("userToken")} userId={profileData._id} />}
+            element={
+              <AddExperience
+                token={localStorage.getItem("userToken")}
+                userId={profileData._id}
+              />
+            }
           />
           <Route path="/home" element={<Homepage></Homepage>} />
         </Routes>
