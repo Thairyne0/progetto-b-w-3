@@ -55,7 +55,7 @@ const HeroSection = (props: TokenProps) => {
   useEffect(() => {
     fetch("https://striveschool-api.herokuapp.com/api/profile/me", {
       headers: {
-        Authorization: `Bearer ${props.token}`, // Your token
+        Authorization: `Bearer ${props.token}`, 
         "Content-Type": "application/json",
       },
     })
@@ -84,9 +84,9 @@ const HeroSection = (props: TokenProps) => {
       .catch((error) => {
         console.error(error);
       });
-  }, []);
-  // [props.token, props.updateProfileData]
-
+ 
+  }, [props.token, props.updateProfileData]);
+  
   return (
     <>
       <section className="mt-3 col col-12 col-md-11 col-lg-11 bg-white rounded-3 ">
