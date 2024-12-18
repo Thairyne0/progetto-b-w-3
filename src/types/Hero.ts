@@ -7,6 +7,8 @@ interface TokenProps {
    
     updateProfileData?: (newData: Partial<ProfileData>) => void;
     profileData?:ProfileData
+    handleAlert?:(status:boolean)=>void
+   
    
   }
   export default TokenProps

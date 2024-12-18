@@ -35,6 +35,7 @@ const Profile = (props: TokenProps) => {
                 token={props.token}
                 profileData={profileData}
                 updateProfileData={updateProfileData}
+                handleAlert={props.handleAlert}
               />
               <MyExperience profilo={profileData}  token={localStorage.getItem("userToken")} />
             </div>

@@ -1,15 +1,48 @@
+import { useEffect } from "react";
 import { Navbar, Container, Row, Col, Form, Button } from "react-bootstrap";
 import { useNavigate } from "react-router-dom";
-interface  PageAccediProps {
-    token: string;
-    ChangeToken: (value: string) => void;
-    onSubmit: (event: React.FormEvent) => void;}
-    
-    
-    const PageAccedi = (props:PageAccediProps) => {
-        
-        const navigate=useNavigate()
+interface PageAccediProps {
+  token: string;
+  ChangeToken: (value: string) => void;
+  onSubmit: (event: React.FormEvent) => void;
+  handleAlert: (status: boolean) => void;
+  alert: boolean;
+}
 
+const PageAccedi = (props: PageAccediProps) => {
+  const navigate = useNavigate();
+
+  const handleLogin = () => {
+    if (props.alert === false) {
+      navigate("/profile");
+      
+    } else {
+      props.handleAlert(true);
+    }
+  };
+
+    useEffect(()=>{
+ fetch("https://striveschool-api.herokuapp.com/api/profile/me", {
+    headers: {
+      Authorization: `Bearer ${props.token}`,
+      "Content-Type": "application/json",
+    },
+  })
+    .then((response) => {
+      if (response.ok) {
+        props.handleAlert(false); // Resetta l'alert se il token è valido
+        navigate("/profile"); // Naviga al profilo
+      } else {
+        props.handleAlert(true); // Mostra l'alert se la risposta è negativa
+      }
+    })
+    .catch(() => {
+      props.handleAlert(true); // Mostra l'alert se la fetch fallisce
+    });
+
+
+    },[])
+ 
 
   return (
     <>
@@ -33,25 +66,38 @@ interface  PageAccediProps {
             <Form>
               <Form.Group className="mb-3" controlId="formBasicPassword">
                 <Form.Label>Bearer Token</Form.Label>
-                <Form.Control type="password" placeholder="Password" 
-                value={props.token} onChange={(e)=>{props.ChangeToken(e.target.value)}} />
+                <Form.Control
+                  type="password"
+                  placeholder="Password"
+                  value={props.token}
+                  onChange={(e) => {
+                    props.ChangeToken(e.target.value);
+                  }}
+                />
                 <Form.Text id="passwordHelpBlock" muted>
                   Insert your Bearer Token
                 </Form.Text>
               </Form.Group>
 
-              <Button  variant="primary" type="button" onClick={()=>{navigate("/profile")}}>
+              <Button variant="primary" type="button" onClick={handleLogin}>
                 Accedi
               </Button>
             </Form>
           </Col>
         </Row>
-          <Row>
-            <Col className="col-6 m-auto" >
-               <p>Non hai un account Linkedin? <a href="https://strive.school/linkedin-registration" target="_blank">Iscriviti ora</a></p>
-
-            </Col>
-          </Row>
+        <Row>
+          <Col className="col-6 m-auto">
+            <p>
+              Non hai un account Linkedin?{" "}
+              <a
+                href="https://strive.school/linkedin-registration"
+                target="_blank"
+              >
+                Iscriviti ora
+              </a>
+            </p>
+          </Col>
+        </Row>
       </Container>
     </>
   );

@@ -7,11 +7,18 @@ import Profile from "./pages/Profile";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import AddExperience from "./components/AddExperience";
 import Homepage from "./pages/Homepage";
+import { Alert } from "react-bootstrap";
 
 function App() {
   // stato
   const [token, settoken] = useState<string>("");
+  const [alert, setAlert] = useState<boolean>(false);
 
+
+  // funzione per l'alert
+  const handleAlert=(status:boolean)=>{
+ setAlert(status)
+  }
 
 
   //  funzione per cambiare lo stato di key
@@ -24,22 +31,31 @@ function App() {
   const handleSubmit = (event: React.FormEvent) => {
     event.preventDefault();
   };
+   
 
   return (
     <>
       <BrowserRouter>
+      {alert && (
+          <Alert  variant="danger">
+          Il token inserito non è valido!
+        </Alert>
+        )}
         <Routes>
           <Route
             path="/"
             element={
               <PageAccedi
+               handleAlert={handleAlert}
+               alert={alert}
                 token={token}
                 ChangeToken={HandletokenChange}
+
                 onSubmit={handleSubmit}
               />
             }
           />
-          <Route path="/profile" element={<Profile token={localStorage.getItem("userToken")} />} />
+          <Route path="/profile" element={<Profile handleAlert={handleAlert}  token={localStorage.getItem("userToken")} />} />
           <Route path="/edit-profile" element={<EditProfile></EditProfile>} />
           <Route
             path="/add-experience"
