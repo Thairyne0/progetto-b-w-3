@@ -1,15 +1,20 @@
-import { useState } from 'react';
+import { useState } from "react";
 
 interface UploadImgProps {
   userId: string;
   apiUrl: string;
-  token: string;
+  token: string | null;
   onSuccess: (url: string) => void;
   onError: (error: string) => void;
 }
 
-
-const UploadImg: React.FC<UploadImgProps> = ({  apiUrl, token, onSuccess, onError }) => {
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
+const UploadImg: React.FC<UploadImgProps> = ({
+  apiUrl,
+  token,
+  onSuccess,
+  onError,
+}) => {
   const [selectedImage, setSelectedImage] = useState<File | null>(null);
 
   const handleImageChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -21,15 +26,15 @@ const UploadImg: React.FC<UploadImgProps> = ({  apiUrl, token, onSuccess, onErro
   const handleUpload = (): Promise<void> => {
     return new Promise((resolve, reject) => {
       if (!selectedImage) {
-        reject('No image selected');
+        reject("No image selected");
         return;
       }
 
       const formData = new FormData();
-      formData.append('profile', selectedImage); 
+      formData.append("profile", selectedImage); // 'profile' as per the API requirements
 
       fetch(apiUrl, {
-        method: 'POST',
+        method: "POST",
         headers: {
           Authorization: `Bearer ${token}`,
         },
@@ -37,7 +42,7 @@ const UploadImg: React.FC<UploadImgProps> = ({  apiUrl, token, onSuccess, onErro
       })
         .then((response) => {
           if (!response.ok) {
-            reject('Failed to upload image');
+            reject("Failed to upload image");
             return;
           }
           return response.json();
@@ -47,7 +52,7 @@ const UploadImg: React.FC<UploadImgProps> = ({  apiUrl, token, onSuccess, onErro
           onSuccess(data.imageUrl); 
         })
         .catch((error) => {
-          reject(error.message || 'An error occurred');
+          reject(error.message || "An error occurred");
         });
     });
   };
@@ -66,7 +71,7 @@ const UploadImg: React.FC<UploadImgProps> = ({  apiUrl, token, onSuccess, onErro
         onClick={() => {
           handleUpload()
             .then(() => {
-              console.log('Upload successful');
+              console.log("Upload successful");
             })
             .catch((error) => {
               onError(error);
