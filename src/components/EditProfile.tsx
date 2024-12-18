@@ -15,8 +15,7 @@ const EditProfile: React.FC = () => {
     _id: "",
   });
 
-  const token =
-    "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NzYxMzM4Zjc0YTg2ODAwMTVkYjU1MDgiLCJpYXQiOjE3MzQ0MjM0MzksImV4cCI6MTczNTYzMzAzOX0.FDictyrEQTuSrwL-vVijXHNmMtJuNlp5cdGtobh4suY";
+  const token: string | null = localStorage.getItem("userToken");
 
   useEffect(() => {
     fetch("https://striveschool-api.herokuapp.com/api/profile/me", {
