@@ -15,34 +15,30 @@ const PageAccedi = (props: PageAccediProps) => {
   const handleLogin = () => {
     if (props.alert === false) {
       navigate("/profile");
-      
+      console.log("ooooooooo");
     } else {
       props.handleAlert(true);
     }
   };
 
-    useEffect(()=>{
- fetch("https://striveschool-api.herokuapp.com/api/profile/me", {
-    headers: {
-      Authorization: `Bearer ${props.token}`,
-      "Content-Type": "application/json",
-    },
-  })
-    .then((response) => {
-      if (response.ok) {
-        props.handleAlert(false); // Resetta l'alert se il token è valido
-        navigate("/profile"); // Naviga al profilo
-      } else {
-        props.handleAlert(true); // Mostra l'alert se la risposta è negativa
-      }
+  useEffect(() => {
+    fetch("https://striveschool-api.herokuapp.com/api/profile/me", {
+      headers: {
+        Authorization: `Bearer ${props.token}`,
+        "Content-Type": "application/json",
+      },
     })
-    .catch(() => {
-      props.handleAlert(true); // Mostra l'alert se la fetch fallisce
-    });
-
-
-    },[])
- 
+      .then((response) => {
+        if (response.ok) {
+          props.handleAlert(false); // Resetta l'alert se il token è valido
+        } else {
+          props.handleAlert(true); // Mostra l'alert se la risposta è negativa
+        }
+      })
+      .catch(() => {
+        props.handleAlert(true); // Mostra l'alert se la fetch fallisce
+      });
+  }, [props.onSubmit]);
 
   return (
     <>
