@@ -48,8 +48,6 @@ const CardExperience = (props: ExperienceProps) => {
                   {props.experience.role}
                 </Card.Title>
                 <Card.Text className="text-muted m-0">
-                  <small>{props.experience.company}</small>
-                  <br />
                   <small>
                     {props.experience.company}
                     <br />
@@ -57,7 +55,7 @@ const CardExperience = (props: ExperienceProps) => {
                       year: "numeric",
                       month: "short",
                     }).format(new Date(props.experience.startDate))}{" "}
-                    -
+                    -{" "}
                     {new Intl.DateTimeFormat("en-US", {
                       year: "numeric",
                       month: "short",
@@ -65,14 +63,14 @@ const CardExperience = (props: ExperienceProps) => {
                       new Date(props.experience.endDate || new Date())
                     )}{" "}
                     ·
-                    {(() => {
+                    {" "}{(() => {
                       const start = new Date(props.experience.startDate);
                       const end = props.experience.endDate
                         ? new Date(props.experience.endDate)
                         : new Date();
                       const months = Math.floor(
                         (end.getTime() - start.getTime()) /
-                          (1000 * 3600 * 24 * 30)
+                        (1000 * 3600 * 24 * 30)
                       );
                       const years = Math.floor(months / 12);
                       const remainingMonths = months % 12;
@@ -80,9 +78,8 @@ const CardExperience = (props: ExperienceProps) => {
                       if (years > 0) {
                         return `${years} yr${years > 1 ? "s" : ""}`;
                       } else if (remainingMonths > 0) {
-                        return `${remainingMonths} month${
-                          remainingMonths > 1 ? "s" : ""
-                        }`;
+                        return `${remainingMonths} month${remainingMonths > 1 ? "s" : ""
+                          }`;
                       } else {
                         return "0 months";
                       }
