@@ -75,7 +75,7 @@ function MyNewNavBar() {
             </NavDropdown>
           </Nav>
           <NavDropdown
-            title="Account"
+            title="Per le aziende"
             id="navbarScrollingDropdown"
             className="d-lg-none"
           >
