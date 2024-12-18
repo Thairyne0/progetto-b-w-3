@@ -16,8 +16,8 @@ function App() {
 
 
   // funzione per l'alert
-  const handleAlert=(status:boolean)=>{
- setAlert(status)
+  const handleAlert = (status: boolean) => {
+    setAlert(status)
   }
 
 
@@ -31,23 +31,23 @@ function App() {
   const handleSubmit = (event: React.FormEvent) => {
     event.preventDefault();
   };
-   
+
 
   return (
     <>
       <BrowserRouter>
-      {alert && (
-          <Alert  variant="danger">
-          Il token inserito non è valido!
-        </Alert>
+        {alert && (
+          <Alert variant="danger">
+            Il token inserito non è valido!
+          </Alert>
         )}
         <Routes>
           <Route
             path="/"
             element={
               <PageAccedi
-               handleAlert={handleAlert}
-               alert={alert}
+                handleAlert={handleAlert}
+                alert={alert}
                 token={token}
                 ChangeToken={HandletokenChange}
 
@@ -55,11 +55,11 @@ function App() {
               />
             }
           />
-          <Route path="/profile" element={<Profile handleAlert={handleAlert}  token={localStorage.getItem("userToken")} />} />
+          <Route path="/profile" element={<Profile handleAlert={handleAlert} token={localStorage.getItem("userToken")} />} />
           <Route path="/edit-profile" element={<EditProfile></EditProfile>} />
           <Route
             path="/add-experience"
-            element={<AddExperience token={token} userId="" />}
+            element={<AddExperience token={localStorage.getItem("userToken")} userId="userId" />}
           />
           <Route path="/home" element={<Homepage></Homepage>} />
         </Routes>

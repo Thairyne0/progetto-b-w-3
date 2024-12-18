@@ -18,7 +18,7 @@ interface ExperienceForm {
 
 interface AddExperienceProps {
   userId: string;
-  token: string;
+  token: string | null;
 }
 
 const AddExperience = ({ userId, token }: AddExperienceProps) => {
@@ -50,7 +50,7 @@ const AddExperience = ({ userId, token }: AddExperienceProps) => {
 
     try {
       const response = await fetch(
-        `https://striveschool-api.herokuapp.com/api/profile/$/experiences`,
+        `https://striveschool-api.herokuapp.com/api/profile/${userId}/experiences`,
         {
           method: "POST",
           headers: {
