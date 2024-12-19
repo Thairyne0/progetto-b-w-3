@@ -13,8 +13,6 @@ interface ExperienceForm {
   endDate: string | null;
   description: string;
   area: string;
-  hybrid: boolean;
-  imageUrl: string | null;
 }
 
 interface AddExperienceProps {
@@ -33,8 +31,6 @@ const AddExperience = ({ userId, token }: AddExperienceProps) => {
     endDate: null,
     description: "",
     area: "",
-    hybrid: false,
-    imageUrl: null,
   });
 
   const [selectedImage, setSelectedImage] = useState<File | null>(null);
@@ -58,7 +54,7 @@ const AddExperience = ({ userId, token }: AddExperienceProps) => {
       }
 
       const formData = new FormData();
-      formData.append("profile", selectedImage);
+      formData.append("experience", selectedImage);
 
       console.log("Form data for upload:", formData);
 
@@ -103,8 +99,6 @@ const AddExperience = ({ userId, token }: AddExperienceProps) => {
       endDate: form.endDate || "",
       description: form.description,
       area: form.area,
-      hybrid: form.hybrid.toString(),
-      imageUrl: form.imageUrl || "",
     };
 
     try {
@@ -159,8 +153,6 @@ const AddExperience = ({ userId, token }: AddExperienceProps) => {
           endDate: null,
           description: "",
           area: "",
-          hybrid: false,
-          imageUrl: null,
         });
         // navigate("/profile")
       } else {
@@ -266,13 +258,13 @@ const AddExperience = ({ userId, token }: AddExperienceProps) => {
                     className="ms-5 mt-4 align-self-center fs-6"
                     controlId="formBasicCheckbox"
                   >
-                    <Form.Check
+                    {/* <Form.Check
                       type="checkbox"
                       label={<span className="ms-2">Ibrido/Smart Working</span>}
                       name="hybrid"
                       checked={form.hybrid}
                       onChange={handleInput}
-                    />
+                    /> */}
                   </Form.Group>
                 </span>
 

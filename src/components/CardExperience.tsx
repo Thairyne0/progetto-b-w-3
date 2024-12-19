@@ -193,13 +193,13 @@ const CardExperience = (props: ExperienceProps) => {
                 className="ms-5 mt-4 align-self-center fs-6"
                 controlId="formBasicCheckbox"
               >
-                <Form.Check
+                {/* <Form.Check
                   type="checkbox"
                   label={<span className="ms-2">Ibrido/Smart Working</span>}
                   name="hybrid"
                   checked={formData.hybrid}
                   onChange={handleInputChange}
-                />
+                /> */}
               </Form.Group>
             </span>
 
