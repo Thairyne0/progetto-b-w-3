@@ -9,9 +9,9 @@ small:hover {
 }
 
 .custom-button {
-  background-color: #378fe9;
+  background-color: #378fe9 !important;
 }
 
 .custom-button:hover {
-  background-color: #0a66c2;
+  background-color: #0a66c2 !important;
 }
