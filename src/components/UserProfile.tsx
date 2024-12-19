@@ -22,7 +22,7 @@ interface User {
 }
 
 const UserProfile: React.FC = () => {
-  const [user, setUser] = useState<User>({}); 
+  const [user, setUser] = useState<Partial<User>>({});
   const token = localStorage.getItem("userToken");
 
   useEffect(() => {
@@ -45,6 +45,7 @@ const UserProfile: React.FC = () => {
     .catch((err)=>{
       console.log(err)
     })
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   return (
@@ -58,7 +59,7 @@ const UserProfile: React.FC = () => {
           }}
         >
           <img
-            src="https://via.placeholder.com/400x100" 
+            src="./images/dow.jpg" 
             alt="Card Background"
             style={{
               width: '100%',
