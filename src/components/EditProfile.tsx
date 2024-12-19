@@ -83,7 +83,8 @@ const EditProfile: React.FC = () => {
       </header>
       <main>
         <div className="container border border-2 mt-5 d-flex flex-column shadow-sm bg-white rounded-3">
-          <h1 className="text-center mt-5 text-primary fw-bold">
+          <h1 className="text-center mt-5 fw-bold"
+            style={{ color: '#378FE9' }}>
             Edit Profile
           </h1>
 
@@ -174,8 +175,8 @@ const EditProfile: React.FC = () => {
             <button
               type="button"
               onClick={handleUpdateProfile}
-              style={{ width: "150px", padding: "0.25em 1em" }}
-              className="btn-sm border border-primary rounded-pill bg-white text-primary float-start mt-3"
+              style={{ width: "150px", padding: "0.25em 1em", backgroundColor: '#378FE9' }}
+              className=" rounded-pill border-0 text-light mt-5"
             >
               Save Profile
             </button>

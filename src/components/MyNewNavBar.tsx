@@ -10,16 +10,16 @@ import { useNavigate } from "react-router-dom";
 import MyAccountPopUp from "./MyAccountPopUp";
 
 
-interface navbarProps{
-  setSearch?:React.Dispatch<React.SetStateAction<string>>,
-  search?:string
+interface navbarProps {
+  setSearch?: React.Dispatch<React.SetStateAction<string>>,
+  search?: string
 }
 
 
 
-function MyNewNavBar(props:navbarProps) {
+function MyNewNavBar(props: navbarProps) {
   const navigate = useNavigate();
- 
+
 
   const handleNavigation = (route: string) => {
     navigate(route);
@@ -29,7 +29,7 @@ function MyNewNavBar(props:navbarProps) {
     <Navbar expand="lg" className="bg-body-tertiary flex align-items-center">
       <Container fluid>
         <a href="#">
-          <h2 className="px-2 fw-bold bg-primary d-inline-block text-light rounded me-3 mt-1">
+          <h2 className="px-2 fw-bold d-inline-block text-light rounded me-3 mt-1" style={{ backgroundColor: '#378FE9' }}>
             in
           </h2>
         </a>
@@ -47,9 +47,9 @@ function MyNewNavBar(props:navbarProps) {
                 className="me-2"
                 aria-label="Search"
                 value={props.search}
-                onChange={(e)=>{props.setSearch!(e.target.value)}}
+                onChange={(e) => { props.setSearch!(e.target.value) }}
               />
-              <Button variant="btn btn-primary">Cerca</Button>
+              <Button variant='btn' style={{ backgroundColor: '#378FE9', color: 'black' }}>Cerca</Button>
               {/* <Form.Select aria-label="Default select example">
                 <option>search for...</option>
                 <option value="1">Word</option>

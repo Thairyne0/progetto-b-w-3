@@ -46,9 +46,10 @@ const PageAccedi = (props: PageAccediProps) => {
         <Container>
           <Navbar.Brand href="#home">
             <img
-              src="/images/download.png "
+              src="/public/images/LI-Logo.png "
               style={{
                 maxHeight: "70px",
+                maxWidth: '100px',
               }}
               className="d-inline-block align-top img-fluid"
               alt="React Bootstrap logo"
@@ -75,7 +76,8 @@ const PageAccedi = (props: PageAccediProps) => {
                 </Form.Text>
               </Form.Group>
 
-              <Button variant="primary" type="button" onClick={handleLogin}>
+              <Button variant="primary" type="button" onClick={handleLogin}
+                style={{ backgroundColor: '#378FE9' }}>
                 Accedi
               </Button>
             </Form>
