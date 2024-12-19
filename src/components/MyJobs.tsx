@@ -77,10 +77,10 @@ const MyJobs = () => {
       <MyNewNavBar search={search} setSearch={setSearch} />
       <Container fluid>
         <Row className=" justify-content-center mt-5">
-          <Col className="col col-11 col-lg-2">
+          <Col className="col col-11 col-md-4 col-lg-3 mb-2 p-0 me-md-3">
            <UserProfile />
           </Col>
-          <Col className="col col-11 col-lg-6 bg-light rounded-3">
+          <Col className="col col-11 col-md-7 col-lg-6 bg-light rounded-3 card">
             <h5 className=" mt-3">Le principali offerte di lavoro per te </h5>
             <p className="text-secondary small">
               In base al tuo profilo, alle tue preferenze e ad attività come

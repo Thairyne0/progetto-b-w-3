@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from "react";
-import { Container, Card, Row,  ListGroup , Button} from "react-bootstrap";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faBookmark, faUserGroup, faEnvelope, faCalendar,  } from "@fortawesome/free-solid-svg-icons";
+import {  Card,Button} from "react-bootstrap";
+
 import "bootstrap/dist/css/bootstrap.min.css";
 
 // Definizione dell'interfaccia per i dati utente
@@ -59,7 +58,7 @@ const UserProfile: React.FC = () => {
           }}
         >
           <img
-            src="https://via.placeholder.com/400x100" // Sostituisci con la tua immagine di sfondo
+            src="https://via.placeholder.com/400x100" 
             alt="Card Background"
             style={{
               width: '100%',
@@ -79,7 +78,7 @@ const UserProfile: React.FC = () => {
           }}
         >
           <img
-            src="https://via.placeholder.com/100" // Sostituisci con l'immagine del profilo
+            src={user.image || "https://via.placeholder.com/300x80"} 
             alt="Profile"
             style={{
               borderRadius: '50%',
@@ -91,12 +90,12 @@ const UserProfile: React.FC = () => {
         </div>
   
         {/* Contenuto della card */}
-        <Card.Body className="text-center" style={{ transform: 'translateY(-20px)' }}>
+        <Card.Body className="text-center py-0" style={{ transform: 'translateY(-20px)' }}>
           <Card.Title> <span>{user.name}</span> <span>{user.surname}</span></Card.Title>
           <Card.Subtitle className="mb-2 text-muted">
             {user.title}
           </Card.Subtitle>
-          <Card.Text>{user.area}</Card.Text>
+          <Card.Text className="small">{user.area}</Card.Text>
           <Button variant="outline-secondary" className="w-100 mb-2">
             + Esperienza
           </Button>
