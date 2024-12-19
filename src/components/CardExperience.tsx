@@ -27,94 +27,98 @@ interface ExperienceProps {
   //aggiungo onEdit e onDelete per gestire le due azioni
   onDelete: (experienceId: string) => void;
   onEdit: (experience: IExperience) => void;
-
-
 }
 
 //interfaccia per il modale che serve a modificare una particolare esperienza
 interface ModalProps {
-  experience: IExperience,
+  experience: IExperience;
   //void significa che è una funzione senza valore di ritorno. Infatti serve solo a chiudere il modale, non restituisce niente che possa poi essere riutilizzato dal componente
-  onHide: () => void,
+  onHide: () => void;
   show: boolean;
   //void perché qui non torna nulla, torna nel parent. aggiorna lo stato nel parent
-  onEdit: (experience: IExperience) => void
+  onEdit: (experience: IExperience) => void;
 }
 const CardExperience = (props: ExperienceProps) => {
-
-
   //stato per gestire il modale e il form di modifica dell'esperienza
-  const [modalShow, setModalShow] = useState(false)
-  const [formData, setFormData] = useState<IExperience>({ ...props.experience })
-
+  const [modalShow, setModalShow] = useState(false);
+  const [formData, setFormData] = useState<IExperience>({
+    ...props.experience,
+  });
 
   //metodo per modificare l'esperienza, legato al modale
 
   //changeEvent è un tipo di evento di react che viene triggerato quando cambia il valore di un campo input di un form. I tipi invece indicano il campo input e la textarea
-  const handleInputChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
+  const handleInputChange = (
+    e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
+  ) => {
     //destrutturo, dico che devo prendere queste due proprietà  da e.target Name è l'attributo del campo input, value quello che ci scrivo. (e.target è il campo input)
     const { name, value } = e.target; //comse scriverle separate: const name = e.target.name const value = e.target.value
 
-    // aggiorno lo stato di formData a partire dai dati precedenti, cambio solo quelli modificati. name è tra parentesi quadre perché così accedo a ogni proprietà senza bisogno di scriverle una a una. 
-    setFormData({ ...formData, [name]: value })
-  }
+    // aggiorno lo stato di formData a partire dai dati precedenti, cambio solo quelli modificati. name è tra parentesi quadre perché così accedo a ogni proprietà senza bisogno di scriverle una a una.
+    setFormData({ ...formData, [name]: value });
+  };
 
   //funzione per gestire l'invio del form di modifica dell'esperienza
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     if (props.token) {
-      const response = await fetch(`https://striveschool-api.herokuapp.com/api/profile/${props.profileId}/experiences/${props.experience._id}`,
+      const response = await fetch(
+        `https://striveschool-api.herokuapp.com/api/profile/${props.profileId}/experiences/${props.experience._id}`,
 
         {
-          method: 'PUT',
+          method: "PUT",
           headers: {
-            "Content-Type": 'application/json',
-            Authorization: `Bearer ${props.token}`
+            "Content-Type": "application/json",
+            Authorization: `Bearer ${props.token}`,
           },
-          body: JSON.stringify(formData)
-        })
+          body: JSON.stringify(formData),
+        }
+      );
       if (response.ok) {
         //aggiorna i dati nel componente padre (è una funzione che si passa). In realtà non ho capito bene, ho seguito un tutorial
         props.onEdit(formData);
-        setModalShow(false) //chiudo il modale
-      } else { throw new Error("Errore nella modifica dell'esperienza") }
+        setModalShow(false); //chiudo il modale
+      } else {
+        throw new Error("Errore nella modifica dell'esperienza");
+      }
     }
-  }
+  };
 
   //metodo delete per eliminare l'esperienza
   const handleDelete = async () => {
     if (props.token) {
-      const response = await fetch(`https://striveschool-api.herokuapp.com/api/profile/${props.profileId}/experiences/${props.experience._id}`, {
-        method: 'DELETE',
-        headers: {
-          "Content-Type": 'application/json',
-          Authorization: `Bearer ${props.token}`
-        },
-
-      })
+      const response = await fetch(
+        `https://striveschool-api.herokuapp.com/api/profile/${props.profileId}/experiences/${props.experience._id}`,
+        {
+          method: "DELETE",
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: `Bearer ${props.token}`,
+          },
+        }
+      );
 
       if (response.ok) {
         //chiama onDelete per cancellare l'esperienza selezionata (su cui premo il cestino)
-        props.onDelete(props.experience._id)
-      } else { throw new Error("Errore nell'eliminazione dell'esperienza") }
-
+        props.onDelete(props.experience._id);
+      } else {
+        throw new Error("Errore nell'eliminazione dell'esperienza");
+      }
     }
-  }
+  };
 
   //modale. Gli passo le props che dovrò utilizzare al suo interno
   function MyVerticallyCenteredModal(props: ModalProps) {
     //destrutturo props, prendo questi valori (è come scrivere props.experience, props.onHide...)
-    const { experience, onHide, show, onEdit } = props;
+    const { experience, onHide, show } = props;
     return (
-
-
       <Modal
         show={show}
         size="lg"
         aria-labelledby="contained-modal-title-vcenter"
         centered
         onHide={onHide}
-
+        animation={false}
       >
         <Modal.Header closeButton>
           <Modal.Title id="contained-modal-title-vcenter">
@@ -122,7 +126,10 @@ const CardExperience = (props: ExperienceProps) => {
           </Modal.Title>
         </Modal.Header>
         <Modal.Body>
-          <Form onSubmit={handleSubmit} className="w-100">
+          <Form
+            onSubmit={handleSubmit}
+            className="w-100"
+          >
             <Form.Group className="mb-3 w-75">
               <Form.Label className="fs-5">Ruolo</Form.Label>
               <Form.Control
@@ -175,7 +182,10 @@ const CardExperience = (props: ExperienceProps) => {
               />
             </Form.Group>
             <span className="d-flex align-items-center flex-wrap">
-              <Form.Group className="mb-3" style={{ width: "280px" }}>
+              <Form.Group
+                className="mb-3"
+                style={{ width: "280px" }}
+              >
                 <Form.Label className="fs-5">Sede dell'azienda</Form.Label>
                 <Form.Control
                   type="text"
@@ -204,14 +214,11 @@ const CardExperience = (props: ExperienceProps) => {
               type="submit"
               className="my-4 fw-bold pt-2 px-3"
               style={{ borderRadius: "30px" }}
-
             >
               Submit
             </Button>
-
           </Form>
         </Modal.Body>
-
       </Modal>
     );
   }
@@ -237,12 +244,14 @@ const CardExperience = (props: ExperienceProps) => {
             </Col>
             <Col className="col-10 col-md-11">
               <Card.Body className="d-flex flex-column">
-                <span className="align-self-end justify-content-center"><Button style={{ backgroundColor: "transparent" }} className="small p-1 border-0 me-2" onClick={() => setModalShow(true)}>
-                  <i className="bi bi-pencil-square text-black fs-5"></i>
-                </Button>
-
-
-
+                <span className="align-self-end justify-content-center">
+                  <Button
+                    style={{ backgroundColor: "transparent" }}
+                    className="small p-1 border-0 me-2"
+                    onClick={() => setModalShow(true)}
+                  >
+                    <i className="bi bi-pencil-square text-black fs-5"></i>
+                  </Button>
 
                   <MyVerticallyCenteredModal
                     experience={props.experience}
@@ -251,14 +260,15 @@ const CardExperience = (props: ExperienceProps) => {
                     onEdit={props.onEdit}
                   />
 
-
-
-
-
-
-                  <Button style={{ backgroundColor: "transparent" }} className="small p-1 border-0" onClick={handleDelete}>
+                  <Button
+                    style={{ backgroundColor: "transparent" }}
+                    className="small p-1 border-0"
+                    onClick={handleDelete}
+                  >
                     <i className="bi bi-trash3 text-black fs-5"></i>
-                  </Button></span><Card.Title className="mb-0">
+                  </Button>
+                </span>
+                <Card.Title className="mb-0">
                   {props.experience.role}
                 </Card.Title>
                 <Card.Text className="text-muted m-0">
@@ -276,8 +286,8 @@ const CardExperience = (props: ExperienceProps) => {
                     }).format(
                       new Date(props.experience.endDate || new Date())
                     )}{" "}
-                    ·
-                    {" "}{(() => {
+                    ·{" "}
+                    {(() => {
                       const start = new Date(props.experience.startDate);
                       const end = props.experience.endDate
                         ? new Date(props.experience.endDate)
