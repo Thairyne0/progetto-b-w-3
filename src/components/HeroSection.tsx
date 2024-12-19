@@ -28,8 +28,7 @@ const HeroSection = (props: TokenProps) => {
   };
 
   const buttonStyles = (hovered: boolean) => ({
-    backgroundColor: hovered ? "blue" : "#378FE9",
-    // border: "blue 1px solid",
+    backgroundColor: hovered ? "#0A66C2" : "#378FE9",
     border: '0px',
     color: 'white',
     marginTop: "1em",

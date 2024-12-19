@@ -76,8 +76,8 @@ const PageAccedi = (props: PageAccediProps) => {
                 </Form.Text>
               </Form.Group>
 
-              <Button variant="primary" type="button" onClick={handleLogin}
-                style={{ backgroundColor: '#378FE9' }}>
+              <Button className="custom-button" type="button" onClick={handleLogin}>
+
                 Accedi
               </Button>
             </Form>
@@ -96,7 +96,7 @@ const PageAccedi = (props: PageAccediProps) => {
             </p>
           </Col>
         </Row>
-      </Container>
+      </Container >
     </>
   );
 };

@@ -90,13 +90,11 @@ const MyExperience = (props: myExperienceProps) => {
             {/* </Col> */}
 
             <Button
-              variant="outline-primary"
-              size="md"
+
+              size="sm"
               onClick={handleNavigateRoute}
-              className="mt-2 mb-3 text-light border-0 py-1 px-3 rounded-pill"
-              style={{
-                backgroundColor: '#378FE9'
-              }}
+              className="mt-2 mb-3 text-light border-0 py-2 px-4 rounded-pill custom-button"
+
             >
               Aggiungi esperienza
             </Button>

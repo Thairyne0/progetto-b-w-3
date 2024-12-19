@@ -205,8 +205,8 @@ const AddExperience = ({ userId, token }: AddExperienceProps) => {
                 <Button
                   id="submitButton"
                   type="submit"
-                  className="my-4 fw-bold pt-2 px-3 border-0 rounded-pill"
-                  style={{ backgroundColor: '#378FE9' }}
+                  className="my-4 fw-bold pt-2 px-3 border-0 rounded-pill custon-button"
+
 
                 >
                   Submit
