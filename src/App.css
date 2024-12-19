@@ -6,17 +6,12 @@ small:hover {
 .footer-text {
   font-size: 0.777rem !important;
   color: #7c7c7c !important;
-
-
 }
 
-
-/* button del form AddExperience */
-#submitButton {
-  background-color: #378FE9
+.custom-button {
+  background-color: #378fe9;
 }
 
-#submitButton:hover {
-
-  background-color: #004182
+.custom-button:hover {
+  background-color: #0a66c2;
 }
