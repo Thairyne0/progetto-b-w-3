@@ -86,7 +86,7 @@ function App() {
             }
           />
           <Route path="/home" element={<Homepage></Homepage>} />
-          <Route path="/jobs" element={<MyJobs  />} />
+          <Route path="/jobs" element={<MyJobs/>} />
         </Routes>
       </BrowserRouter>
     </>
