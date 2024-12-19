@@ -46,9 +46,10 @@ const PageAccedi = (props: PageAccediProps) => {
         <Container>
           <Navbar.Brand href="#home">
             <img
-              src="/images/download.png "
+              src="/public/images/LI-Logo.png "
               style={{
                 maxHeight: "70px",
+                maxWidth: '100px',
               }}
               className="d-inline-block align-top img-fluid"
               alt="React Bootstrap logo"
