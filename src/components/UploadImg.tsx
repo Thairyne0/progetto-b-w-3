@@ -8,7 +8,7 @@ interface UploadImgProps {
   onError: (error: string) => void;
 }
 
-// eslint-disable-next-line @typescript-eslint/no-unused-vars
+
 const UploadImg: React.FC<UploadImgProps> = ({
   apiUrl,
   token,
@@ -31,7 +31,7 @@ const UploadImg: React.FC<UploadImgProps> = ({
       }
 
       const formData = new FormData();
-      formData.append("profile", selectedImage); // 'profile' as per the API requirements
+      formData.append("profile", selectedImage); 
 
       fetch(apiUrl, {
         method: "POST",
@@ -49,7 +49,7 @@ const UploadImg: React.FC<UploadImgProps> = ({
         })
         .then((data) => {
           resolve();
-          onSuccess(data.imageUrl); // Assuming the API returns the image URL under `imageUrl`
+          onSuccess(data.imageUrl); 
         })
         .catch((error) => {
           reject(error.message || "An error occurred");
