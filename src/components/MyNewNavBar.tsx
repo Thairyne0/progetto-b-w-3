@@ -4,8 +4,16 @@ import Form from "react-bootstrap/Form";
 import Nav from "react-bootstrap/Nav";
 import Navbar from "react-bootstrap/Navbar";
 import NavDropdown from "react-bootstrap/NavDropdown";
+import { useNavigate } from "react-router-dom";
+import MyAccountPopUp from "./MyAccountPopUp";
 
 function MyNewNavBar() {
+  const navigate = useNavigate();
+
+  const handleNavigation = (route: string) => {
+    navigate(route);
+  };
+
   return (
     <Navbar expand="lg" className="bg-body-tertiary flex align-items-center">
       <Container fluid>
@@ -30,35 +38,41 @@ function MyNewNavBar() {
               />
               <Button variant="btn btn-primary">Cerca</Button>
             </Form>
-            <Nav.Link href="#action1" className="fw-bold">
+            <Nav.Link
+              className="fw-bold"
+              onClick={() => handleNavigation("/home")}
+            >
               <i className="bi bi-house-heart-fill me-1"></i>
               Home
             </Nav.Link>
-            <Nav.Link href="#action2" className="fw-bold">
+            <Nav.Link className="fw-bold">
               <i className="bi bi-people-fill  me-1"></i>
               Rete
             </Nav.Link>
-            <Nav.Link href="#action2" className="fw-bold">
-              <i className="bi bi-suitcase-lg-fill  me-1"></i>
+            <Nav.Link
+              className="fw-bold"
+              onClick={() => handleNavigation("/job")}
+            >
+              <i className="bi bi-suitcase-lg-fill me-1"></i>
               Lavoro
             </Nav.Link>
-            <Nav.Link href="#action2" className="fw-bold">
+            <Nav.Link className="fw-bold">
               <i className="bi bi-chat-dots-fill  me-1"></i>
               Messaggistica
             </Nav.Link>
-            <Nav.Link href="#action2" className="fw-bold">
+            <Nav.Link className="fw-bold">
               <i className="bi bi-bell-fill  me-1"></i>
               Notifiche
             </Nav.Link>
             <NavDropdown title="Account" id="navbarScrollingDropdown">
-              <NavDropdown.Item href="#action3">Action</NavDropdown.Item>
+              <NavDropdown.Item onClick={() => handleNavigation("/profile")}>
+                <MyAccountPopUp></MyAccountPopUp>
+              </NavDropdown.Item>
               <NavDropdown.Item href="#action4">
                 Another action
               </NavDropdown.Item>
               <NavDropdown.Divider />
-              <NavDropdown.Item href="#action5">
-                Something else here
-              </NavDropdown.Item>
+              <NavDropdown.Item href="#action5">Log Out</NavDropdown.Item>
             </NavDropdown>
           </Nav>
           <NavDropdown
@@ -79,12 +93,9 @@ function MyNewNavBar() {
             className="d-none d-lg-block me-3"
             drop="start"
           >
-            <NavDropdown.Item href="#action3">Action</NavDropdown.Item>
-            <NavDropdown.Item href="#action4">Another action</NavDropdown.Item>
+            <NavDropdown.Item href="#action3"></NavDropdown.Item>
             <NavDropdown.Divider />
-            <NavDropdown.Item href="#action5">
-              Something else here
-            </NavDropdown.Item>
+            <NavDropdown.Item href="#action5">Action</NavDropdown.Item>
           </NavDropdown>
         </Navbar.Collapse>
       </Container>

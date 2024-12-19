@@ -118,6 +118,7 @@ const CardExperience = (props: ExperienceProps) => {
         aria-labelledby="contained-modal-title-vcenter"
         centered
         onHide={onHide}
+        animation={false}
       >
         <Modal.Header closeButton>
           <Modal.Title id="contained-modal-title-vcenter">
