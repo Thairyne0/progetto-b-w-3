@@ -212,8 +212,8 @@ const CardExperience = (props: ExperienceProps) => {
             <Button
               id="submitButton"
               type="submit"
-              className="my-4 fw-bold pt-2 px-3"
-              style={{ borderRadius: "30px" }}
+              className="my-4 fw-bold pt-2 px-3 rounded-pill border-0"
+              style={{ backgroundColor: "#378FE9" }}
             >
               Submit
             </Button>

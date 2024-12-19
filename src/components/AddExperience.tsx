@@ -4,7 +4,7 @@ import { Button, Col, Container, Form, Row } from "react-bootstrap";
 import UploadImg from "./UploadImg";
 import MyNewNavBar from "./MyNewNavBar";
 
-import { useNavigate} from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 
 // Interface with form fields
 interface ExperienceForm {
@@ -25,7 +25,7 @@ interface AddExperienceProps {
 
 const AddExperience = ({ userId, token }: AddExperienceProps) => {
 
-  const navigate=useNavigate()
+  const navigate = useNavigate()
   // Set the initial state of the form including imageUrl
   const [form, setForm] = useState<ExperienceForm>({
     role: "",
@@ -50,7 +50,7 @@ const AddExperience = ({ userId, token }: AddExperienceProps) => {
       area: form.area,
       hybrid: form.hybrid.toString(),
       imageUrl: form.imageUrl || "", // Send image URL if available
-      };
+    };
 
     try {
       const response = await fetch(
@@ -201,17 +201,17 @@ const AddExperience = ({ userId, token }: AddExperienceProps) => {
                   onSuccess={handleImageSuccess}
                   onError={handleImageError}
                 />
-                
+
                 <Button
                   id="submitButton"
                   type="submit"
-                  className="my-4 fw-bold pt-2 px-3"
-                  style={{ borderRadius: "30px" }}
+                  className="my-4 fw-bold pt-2 px-3 border-0 rounded-pill"
+                  style={{ backgroundColor: '#378FE9' }}
 
                 >
                   Submit
                 </Button>
-               
+
               </Form>
             </Col>
           </Row>
