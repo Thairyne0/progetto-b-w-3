@@ -82,14 +82,14 @@ const EditProfile: React.FC = () => {
         <MyNewNavBar></MyNewNavBar>
       </header>
       <main>
-        <div className="container border border-2 mt-5 d-flex flex-column shadow-sm bg-white rounded-3">
+        <div className="container mt-5 d-flex flex-column bg-white shadow rounded-3 w-75">
           <h1 className="text-center mt-5 fw-bold"
             style={{ color: '#378FE9' }}>
             Edit Profile
           </h1>
 
-          <Form className="p-5 d-flex flex-column">
-            <div className="mb-2 d-flex flex-column">
+          <Form className="p-5 d-flex flex-column w-75">
+            <div className="mb-2 d-flex flex-column mb-3 w-50">
               <label className="fw-bold">Name</label>
               <Form.Control
                 id="name-input"
@@ -100,7 +100,7 @@ const EditProfile: React.FC = () => {
                 }
               />
             </div>
-            <div className="mb-2 d-flex flex-column">
+            <div className="mb-2 d-flex flex-column mb-3 w-50">
               <label className="fw-bold">Surname</label>
               <Form.Control
                 id="surname-input"
@@ -111,7 +111,7 @@ const EditProfile: React.FC = () => {
                 }
               />
             </div>
-            <div className="mb-2 d-flex flex-column">
+            <div className="mb-2 d-flex flex-column mb-3 w-50">
               <label className="fw-bold">Username</label>
               <Form.Control
                 id="username-input"
@@ -122,19 +122,20 @@ const EditProfile: React.FC = () => {
                 }
               />
             </div>
-            <div className="mb-2 d-flex flex-column">
+            <div className="mb-2 d-flex flex-column mb-3">
               <label className="fw-bold">Bio</label>
               <Form.Control
                 id="bio-input"
                 type="textarea"
                 as="textarea"
+                rows={4}
                 value={profileData.bio}
                 onChange={(e) =>
                   setProfileData({ ...profileData, bio: e.target.value })
                 }
               />
             </div>
-            <div className="mb-2 d-flex flex-column">
+            <div className="mb-2 d-flex flex-column mb-3">
               <label className="fw-bold">Title</label>
               <Form.Control
                 type="text"
@@ -144,7 +145,7 @@ const EditProfile: React.FC = () => {
                 }
               />
             </div>
-            <div className="mb-2 d-flex flex-column">
+            <div className="mb-2 d-flex flex-column mb-3">
               <label className="fw-bold">Area</label>
               <Form.Control
                 id="location-input"
@@ -156,7 +157,7 @@ const EditProfile: React.FC = () => {
               />
             </div>
 
-            <div className="mt-2">
+            <div className="mt-5">
               <UploadImg
                 userId={profileData._id} // Use the correct userId
                 apiUrl={`https://striveschool-api.herokuapp.com/api/profile/${profileData._id}/picture`} // Correct API URL
@@ -176,7 +177,7 @@ const EditProfile: React.FC = () => {
               type="button"
               onClick={handleUpdateProfile}
               style={{ width: "150px", padding: "0.25em 1em", backgroundColor: '#378FE9' }}
-              className=" rounded-pill border-0 text-light mt-5"
+              className=" rounded-pill border-0 text-light mt-5 custom-button"
             >
               Save Profile
             </button>

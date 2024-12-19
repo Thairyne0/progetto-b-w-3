@@ -121,15 +121,16 @@ const CardExperience = (props: ExperienceProps) => {
         animation={false}
       >
         <Modal.Header closeButton>
-          <Modal.Title id="contained-modal-title-vcenter">
+          <Modal.Title id="contained-modal-title-vcenter ">
             {experience.role}
           </Modal.Title>
         </Modal.Header>
         <Modal.Body>
-          <Form onSubmit={handleSubmit} className="w-100">
-            <Form.Group className="mb-3 w-75">
-              <Form.Label className="fs-5">Ruolo</Form.Label>
+          <Form onSubmit={handleSubmit} className="w-75 mx-auto mt-3">
+            <Form.Group className="mb-3 w-75 ">
+              <Form.Label className="fs-5 ">Ruolo</Form.Label>
               <Form.Control
+
                 type="text"
                 placeholder="Ruolo ricoperto"
                 name="role"
@@ -293,9 +294,8 @@ const CardExperience = (props: ExperienceProps) => {
                   if (years > 0) {
                     return `${years} yr${years > 1 ? "s" : ""}`;
                   } else if (remainingMonths > 0) {
-                    return `${remainingMonths} month${
-                      remainingMonths > 1 ? "s" : ""
-                    }`;
+                    return `${remainingMonths} month${remainingMonths > 1 ? "s" : ""
+                      }`;
                   } else {
                     return "0 months";
                   }

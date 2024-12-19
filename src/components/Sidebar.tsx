@@ -51,7 +51,7 @@ const ContactsList: React.FC = () => {
   }
 
   return (
-    <div className="d-flex flex-column border p-3 text-start bg-white rounded-3 mb-5 mb-md-2">
+    <div className="d-flex flex-column p-3 text-start bg-white shadow rounded-3 mb-5 mb-md-2">
       <div className="mb-3">
         <h6 className="fw-bold">Lingua del profilo</h6>
         <p className="text-muted mb-0">Italiano</p>

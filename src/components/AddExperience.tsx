@@ -193,7 +193,7 @@ const AddExperience = ({ userId, token }: AddExperienceProps) => {
         <Container fluid className="mt-5">
           <Row>
             <Col className="col-5 m-auto shadow p-3 mb-5 bg-body-tertiary rounded justify-content-center d-flex">
-              <Form onSubmit={handleSubmit} className="w-100">
+              <Form onSubmit={handleSubmit} className="w-75 mx-auto">
                 <Form.Group className="mb-3 w-75">
                   <Form.Label className="fs-5">Ruolo</Form.Label>
                   <Form.Control
@@ -256,30 +256,32 @@ const AddExperience = ({ userId, token }: AddExperienceProps) => {
                       onChange={handleInput}
                     />
                   </Form.Group>
-                  <Form.Group
+                  {/* <Form.Group
                     className="ms-5 mt-4 align-self-center fs-6"
                     controlId="formBasicCheckbox"
-                  >
-                    {/* <Form.Check
+                  > */}
+                  {/* <Form.Check
                       type="checkbox"
                       label={<span className="ms-2">Ibrido/Smart Working</span>}
                       name="hybrid"
                       checked={form.hybrid}
                       onChange={handleInput}
                     /> */}
-                  </Form.Group>
+                  {/* </Form.Group> */}
                 </span>
 
-                <div>
+                <div className="my-3">
                   <label htmlFor="uploadImg">Upload Image:</label>
                   <input
                     id="uploadImg"
                     type="file"
                     accept="image/png, image/jpeg"
                     onChange={handleImageChange}
+
                   />
                   <button
                     type="button"
+                    className="mt-2"
                     onClick={() => {
                       handleUpload()
                         .then(() => {
@@ -300,8 +302,8 @@ const AddExperience = ({ userId, token }: AddExperienceProps) => {
                 <Button
                   id="submitButton"
                   type="submit"
-                  className="my-4 fw-bold pt-2 px-3"
-                  style={{ borderRadius: "30px" }}
+                  className="my-4 fw-bold pt-2 px-3 border-0 rounded-pill custom-button"
+
                 >
                   Submit
                 </Button>

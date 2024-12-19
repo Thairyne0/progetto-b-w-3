@@ -95,7 +95,7 @@ const HeroSection = (props: TokenProps) => {
   return (
     <>
 
-      <section className="mt-3 col col-12 col-md-11 col-lg-11 bg-white rounded-3 ">
+      <section className="mt-3 col col-12 col-md-11 col-lg-11 bg-white shadow rounded-3 ">
         <div
           className=" rounded-top-3"
           style={{
@@ -120,7 +120,7 @@ const HeroSection = (props: TokenProps) => {
             </button>
           </div>
         </div>
-        <div className="border border-2 p-5 rounded-bottom-3">
+        <div className="p-5 rounded-bottom-3 mt-3">
           <h1>
             {props.profileData!.name} {props.profileData!.surname}
           </h1>

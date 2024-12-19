@@ -67,7 +67,7 @@ const MyExperience = (props: myExperienceProps) => {
     <>
       <section className="  mt-3 col col-12 col-md-11 col-lg-11 bg-white shadow rounded-3 ">
         <Row className=" justify-content-center">
-          <Col className="col col-10 col-md-10 mt-3  rounded-2 ps-2">
+          <Col className="col col-10 col-md-10 mt-3 px-0 rounded-2">
             {/* <h5 className="text-muted m-0">Esperienza</h5>
             <small className="m-0 text-mute mb-2">
               Metti in risalto i risultati raggiunti e ottieni fino a 2 volte in
@@ -91,9 +91,9 @@ const MyExperience = (props: myExperienceProps) => {
 
             <Button
 
-              size="sm"
+
               onClick={handleNavigateRoute}
-              className="mt-2 mb-3 text-light border-0 py-2 px-4 rounded-pill custom-button"
+              className="mt-2 mb-3 text-light border-0 py-1 rounded-pill custom-button"
 
             >
               Aggiungi esperienza

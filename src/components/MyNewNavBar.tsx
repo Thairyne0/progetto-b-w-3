@@ -49,7 +49,7 @@ function MyNewNavBar(props: navbarProps) {
                 value={props.search}
                 onChange={(e) => { props.setSearch!(e.target.value) }}
               />
-              <Button className="custom-button">Cerca</Button>
+              <Button className="custom-button border-0">Cerca</Button>
               {/* <Form.Select aria-label="Default select example">
                 <option>search for...</option>
                 <option value="1">Word</option>
