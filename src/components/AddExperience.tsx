@@ -1,10 +1,10 @@
 import { ChangeEvent, useState } from "react";
 import { Button, Col, Container, Form, Row } from "react-bootstrap";
-// Import the UploadImg component
 import UploadImg from "./UploadImg";
 import MyNewNavBar from "./MyNewNavBar";
 
 import { useNavigate} from "react-router-dom";
+
 
 // Interface with form fields
 interface ExperienceForm {
@@ -15,7 +15,7 @@ interface ExperienceForm {
   description: string;
   area: string;
   hybrid: boolean;
-  imageUrl: string | null; // Add imageUrl to store the uploaded image URL
+  imageUrl: string | null; 
 }
 
 interface AddExperienceProps {
@@ -24,9 +24,9 @@ interface AddExperienceProps {
 }
 
 const AddExperience = ({ userId, token }: AddExperienceProps) => {
-
+  const [experienceId, setExperienceId] = useState<string | null>(null);
   const navigate=useNavigate()
-  // Set the initial state of the form including imageUrl
+  
   const [form, setForm] = useState<ExperienceForm>({
     role: "",
     company: "",
@@ -49,8 +49,7 @@ const AddExperience = ({ userId, token }: AddExperienceProps) => {
       description: form.description,
       area: form.area,
       hybrid: form.hybrid.toString(),
-      imageUrl: form.imageUrl || "", // Send image URL if available
-      };
+      imageUrl: form.imageUrl || "",}
 
     try {
       const response = await fetch(
@@ -66,7 +65,29 @@ const AddExperience = ({ userId, token }: AddExperienceProps) => {
       );
 
       if (response.ok) {
-        // Reset the form after successful submission
+        const data = await response.json()
+        const experienceId  = data._id
+        setExperienceId(experienceId);
+
+//seconda fetch per recuperare l'id delle esperienze 
+const secondResponse = await fetch(`https://striveschool-api.herokuapp.com/api/profile/${userId}/experiences/${experienceId}`,
+{
+  headers: {
+    "Content-Type": "application/json",
+    Authorization: `Bearer ${token}`,
+  }
+}
+)
+if(secondResponse.ok){
+  const experienceDetails = await secondResponse.json();
+  const imageId = experienceDetails._id
+  setExperienceId(imageId);
+  console.log('experienceId', experienceId)
+}
+else {  throw new Error('Errore recupero experienceId')
+}
+        
+       //reset form 
         setForm({
           role: "",
           company: "",
@@ -192,16 +213,17 @@ const AddExperience = ({ userId, token }: AddExperienceProps) => {
                   </Form.Group>
                 </span>
 
-                {/* Image upload component */}
+           
                 <UploadImg
-                  //https://striveschool-api.herokuapp.com/api/profile/%7BuserId%7D/experiences/:expId/picture
+                  
                   userId={userId}
-                  apiUrl={`https://striveschool-api.herokuapp.com/api/profile/${userId}/experiences/:expId/picture`} // Provide the correct API URL
+                  apiUrl={`https://striveschool-api.herokuapp.com/api/profile/${userId}/experiences/${experienceId}/picture`}
                   token={token}
                   onSuccess={handleImageSuccess}
                   onError={handleImageError}
                 />
-                
+              
+                 {/* soluzione di chatGpt  { &&} */}
                 <Button
                   id="submitButton"
                   type="submit"
@@ -221,4 +243,7 @@ const AddExperience = ({ userId, token }: AddExperienceProps) => {
   );
 };
 
+
 export default AddExperience;
+
+
