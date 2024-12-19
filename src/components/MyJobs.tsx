@@ -3,6 +3,7 @@ import CardJobs from "./CardJobs";
 import { useEffect, useState } from "react";
 import MyNewNavBar from "./MyNewNavBar";
 import UserProfile from "./UserProfile";
+import MyFooter from "./MyFooter";
 
 
 interface Job {
@@ -96,6 +97,7 @@ const MyJobs = () => {
           </Col>
         </Row>
       </Container>
+      <MyFooter/>
     </>
   );
 };
