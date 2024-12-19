@@ -2,6 +2,8 @@ import { Container, Row, Col } from "react-bootstrap";
 import CardJobs from "./CardJobs";
 import { useEffect, useState } from "react";
 import MyNewNavBar from "./MyNewNavBar";
+import UserProfile from "./UserProfile";
+
 
 interface Job {
   _id: string;
@@ -15,6 +17,8 @@ interface Job {
   salary: string;
   url: string;
 }
+
+
 
 const MyJobs = () => {
   const [allJobs, setAllJobs] = useState<Job[]>([]); // Stato che contiene tutti i lavori
@@ -73,10 +77,10 @@ const MyJobs = () => {
       <MyNewNavBar search={search} setSearch={setSearch} />
       <Container fluid>
         <Row className=" justify-content-center mt-5">
-          <Col className="col col-2">
-            {/* qui ci va il compomponente di sinistra(profilo) */} ciao
+          <Col className="col col-11 col-lg-2">
+           <UserProfile />
           </Col>
-          <Col className="col col-6 bg-light rounded-3">
+          <Col className="col col-11 col-lg-6 bg-light rounded-3">
             <h5 className=" mt-3">Le principali offerte di lavoro per te </h5>
             <p className="text-secondary small">
               In base al tuo profilo, alle tue preferenze e ad attività come
@@ -85,10 +89,10 @@ const MyJobs = () => {
             {visibleJobs.map((job) => {
               return <CardJobs key={job._id} job={job} />;
             })}
-
-            <a onClick={loadMoreJobs} className="mt-3 text-black">
+    <div className="text-center"> <hr /><a onClick={loadMoreJobs} className="mt-3 text-black fw-bolder ">
               Visualizza altri
-            </a>
+            </a></div>
+            
           </Col>
         </Row>
       </Container>

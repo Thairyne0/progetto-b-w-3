@@ -1,104 +1,110 @@
 import React, { useState, useEffect } from "react";
-import { Container, Card, Row, Col, ListGroup } from "react-bootstrap";
+import { Container, Card, Row,  ListGroup , Button} from "react-bootstrap";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faBookmark, faUserGroup, faEnvelope, faCalendar, faSquare } from "@fortawesome/free-solid-svg-icons";
+import { faBookmark, faUserGroup, faEnvelope, faCalendar,  } from "@fortawesome/free-solid-svg-icons";
 import "bootstrap/dist/css/bootstrap.min.css";
 
 // Definizione dell'interfaccia per i dati utente
 interface User {
-  name?: string;
-  role?: string;
-  location?: string;
-  profileViews?: number;
-  premiumOffer?: string;
+  _id: string;
+  name: string;
+  surname: string;
+  title: string;
+  username: string;
+  email: string;
+  area: string;
+  bio: string;
+  image: string;
+  createdAt: string;
+  updatedAt: string;
+  __v: number;
   profileImage?: string;
   backgroundImage?: string;
 }
 
 const UserProfile: React.FC = () => {
   const [user, setUser] = useState<User>({}); 
+  const token = localStorage.getItem("userToken");
 
   useEffect(() => {
-    // Carica i dati utente da localStorage
-    const token = localStorage.getItem("userToken");
-    if (token) {
-      try {
-        const userData: User = JSON.parse(token); 
-        setUser(userData);
-      } catch (error) {
-        console.error("Errore nel parsing dei dati utente", error);
-      }
-    }
+
+    fetch( "https://striveschool-api.herokuapp.com/api/profile/me",{
+      headers: {
+        Authorization: `Bearer ${token}`, 
+        "Content-Type": "application/json",
+      },
+    } )
+    .then((response)=>{
+      if(response.ok){
+      return response.json()
+    }else{throw new Error}
+  } )
+  .then((profilo)=>{
+    console.log("profilo", profilo)
+    setUser(profilo);
+  })
+    .catch((err)=>{
+      console.log(err)
+    })
   }, []);
 
   return (
-    <Container>
-      <Card style={{ width: "100%", maxWidth: "400px", margin: "0 auto" }}>
-        {/* Intestazione Profilo con Immagine di Sfondo Dinamica */}
-        <Card.Img
-          src={user.backgroundImage || "https://via.placeholder.com/400x100"}
-          alt="background"
-        />
-        <Card.Body className="text-start">
-          {/* Immagine Profilo */}
-          <div
+    
+      <Card >
+        {/* Sfondo statico */}
+        <div
+          style={{
+            backgroundColor: '#e9ecef',
+            height: '80px',
+          }}
+        >
+          <img
+            src="https://via.placeholder.com/400x100" // Sostituisci con la tua immagine di sfondo
+            alt="Card Background"
             style={{
-              width: "80px",
-              height: "80px",
-              borderRadius: "50%",
-              overflow: "hidden",
-              margin: "0 auto",
-              marginTop: "-40px",
-              border: "3px solid white",
+              width: '100%',
+              height: '100%',
+              objectFit: 'cover',
             }}
-          >
-            <img
-              src={user.profileImage || "https://via.placeholder.com/80"}
-              alt="Profile"
-              style={{ width: "100%", height: "100%" }}
-            />
-          </div>
-          {/* Informazioni Dinamiche */}
-          <h5 className="mt-2">{user.name || "Nome Utente"}</h5>
-          <p className="text-muted">{user.role || "Ruolo non disponibile"}</p>
-          <p className="text-muted">
-            {user.location || "Località non disponibile"}
-          </p>
-          {/* Sezione Analitica */}
-          <Row className="justify-content-start">
-            <Col xs="auto">
-              <p style={{ fontSize: "14px" }} className="m-0">
-                <strong>Profile viewers</strong>{" "}
-                <span style={{ color: "blue" }}>
-                  {user.profileViews || 0}
-                </span>
-              </p>
-            </Col>
-          </Row>
-          {/* Link per Reactivate Premium */}
-          <p className="mt-2" style={{ fontSize: "14px" }}>
-            <FontAwesomeIcon icon={faSquare} />{" "}
-            <a
-              href="#"  
-              style={{
-                color: "orange",
-                textDecoration: "none",
-                fontWeight: "bold",
-              }}
-            >
-              Reactivate Premium: <strong>{user.premiumOffer || "50% Off"}</strong>
-            </a>
-          </p>
+          />
+        </div>
+  
+        {/* Immagine del profilo */}
+        <div
+          style={{
+            position: 'relative',
+            display: 'flex',
+            justifyContent: 'center',
+            transform: 'translateY(-50%)',
+          }}
+        >
+          <img
+            src="https://via.placeholder.com/100" // Sostituisci con l'immagine del profilo
+            alt="Profile"
+            style={{
+              borderRadius: '50%',
+              border: '3px solid white',
+              width: '80px',
+              height: '80px',
+            }}
+          />
+        </div>
+  
+        {/* Contenuto della card */}
+        <Card.Body className="text-center" style={{ transform: 'translateY(-20px)' }}>
+          <Card.Title> <span>{user.name}</span> <span>{user.surname}</span></Card.Title>
+          <Card.Subtitle className="mb-2 text-muted">
+            {user.title}
+          </Card.Subtitle>
+          <Card.Text>{user.area}</Card.Text>
+          <Button variant="outline-secondary" className="w-100 mb-2">
+            + Esperienza
+          </Button>
         </Card.Body>
-        <ListGroup variant="flush">
-          <ListGroup.Item> <FontAwesomeIcon icon={faBookmark} /> Saved items</ListGroup.Item>
-          <ListGroup.Item> <FontAwesomeIcon icon={faUserGroup} /> Groups</ListGroup.Item>
-          <ListGroup.Item> <FontAwesomeIcon icon={faEnvelope} /> Newsletters</ListGroup.Item>
-          <ListGroup.Item> <FontAwesomeIcon icon={faCalendar} /> Events</ListGroup.Item>
-        </ListGroup>
       </Card>
-    </Container>
-  );
+);
 };
+  
+
 
 export default UserProfile;

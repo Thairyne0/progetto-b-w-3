@@ -15,7 +15,7 @@ const PageAccedi = (props: PageAccediProps) => {
   const handleLogin = () => {
     if (props.alert === false) {
       navigate("/profile");
-      console.log("ooooooooo");
+     
     } else {
       props.handleAlert(true);
     }
