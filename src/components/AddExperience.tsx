@@ -1,10 +1,9 @@
 import { ChangeEvent, useState } from "react";
 import { Button, Col, Container, Form, Row } from "react-bootstrap";
-import UploadImg from "./UploadImg";
+// import UploadImg from "./UploadImg";
 import MyNewNavBar from "./MyNewNavBar";
 
-import { useNavigate} from "react-router-dom";
-
+// import { useNavigate} from "react-router-dom";
 
 // Interface with form fields
 interface ExperienceForm {
@@ -15,7 +14,7 @@ interface ExperienceForm {
   description: string;
   area: string;
   hybrid: boolean;
-  imageUrl: string | null; 
+  imageUrl: string | null;
 }
 
 interface AddExperienceProps {
@@ -24,9 +23,9 @@ interface AddExperienceProps {
 }
 
 const AddExperience = ({ userId, token }: AddExperienceProps) => {
-  const [experienceId, setExperienceId] = useState<string | null>(null);
-  const navigate=useNavigate()
-  
+  //   const [experienceId, setExperienceId] = useState<string | null>(null);
+  //   const navigate=useNavigate()
+
   const [form, setForm] = useState<ExperienceForm>({
     role: "",
     company: "",
@@ -37,6 +36,62 @@ const AddExperience = ({ userId, token }: AddExperienceProps) => {
     hybrid: false,
     imageUrl: null,
   });
+
+  const [selectedImage, setSelectedImage] = useState<File | null>(null);
+
+  const handleImageChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    if (e.target.files && e.target.files[0]) {
+      const file = e.target.files[0];
+      console.log("File selezionato:", file);
+
+      setSelectedImage(file);
+    } else {
+      console.log("Nessun file selezionato");
+    }
+  };
+
+  const handleUpload = (): Promise<void> => {
+    return new Promise((resolve, reject) => {
+      if (!selectedImage) {
+        reject("No image selected");
+        return;
+      }
+
+      const formData = new FormData();
+      formData.append("profile", selectedImage);
+
+      console.log("Form data for upload:", formData);
+
+      fetch(
+        `https://striveschool-api.herokuapp.com/api/profile/${userId}/experiences/${localStorage.getItem(
+          "expID"
+        )}/picture`,
+        {
+          method: "POST",
+          headers: {
+            Authorization: `Bearer ${localStorage.getItem("userToken")}`,
+          },
+          body: formData,
+        }
+      )
+        .then((response) => {
+          if (!response.ok) {
+            reject("Failed to upload image");
+            console.log(response);
+            return;
+          }
+          return response.json();
+        })
+        .then((data) => {
+          resolve();
+          console.log(data);
+          //   onSuccess(data.imageUrl);
+        })
+        .catch((error) => {
+          reject(error.message || "An error occurred");
+        });
+    });
+  };
 
   // Funzione per caricare i dati del form
   const handleSubmit = async (e: React.FormEvent) => {
@@ -49,7 +104,8 @@ const AddExperience = ({ userId, token }: AddExperienceProps) => {
       description: form.description,
       area: form.area,
       hybrid: form.hybrid.toString(),
-      imageUrl: form.imageUrl || "",}
+      imageUrl: form.imageUrl || "",
+    };
 
     try {
       const response = await fetch(
@@ -65,29 +121,37 @@ const AddExperience = ({ userId, token }: AddExperienceProps) => {
       );
 
       if (response.ok) {
-        const data = await response.json()
-        const experienceId  = data._id
-        setExperienceId(experienceId);
+        const data = await response.json();
+        const experienceId = data._id;
+        console.log(experienceId);
+        localStorage.setItem("expID", experienceId);
+        console.log(localStorage.getItem("expID"));
+        // setExperienceId(experienceId);
 
-//seconda fetch per recuperare l'id delle esperienze 
-const secondResponse = await fetch(`https://striveschool-api.herokuapp.com/api/profile/${userId}/experiences/${experienceId}`,
-{
-  headers: {
-    "Content-Type": "application/json",
-    Authorization: `Bearer ${token}`,
-  }
-}
-)
-if(secondResponse.ok){
-  const experienceDetails = await secondResponse.json();
-  const imageId = experienceDetails._id
-  setExperienceId(imageId);
-  console.log('experienceId', experienceId)
-}
-else {  throw new Error('Errore recupero experienceId')
-}
-        
-       //reset form 
+        //seconda fetch per recuperare l'id delle esperienze
+        const secondResponse = await fetch(
+          `https://striveschool-api.herokuapp.com/api/profile/${userId}/experiences/${localStorage.getItem(
+            "expID"
+          )}`,
+          {
+            headers: {
+              "Content-Type": "application/json",
+              Authorization: `Bearer ${token}`,
+            },
+          }
+        );
+        if (secondResponse.ok) {
+          const experienceDetails = await secondResponse.json();
+          const imageId = experienceDetails._id;
+          console.log(imageId);
+          //   setExperienceId(imageId);
+          handleUpload();
+          console.log("experienceId", experienceId);
+        } else {
+          throw new Error("Errore recupero experienceId");
+        }
+
+        //reset form
         setForm({
           role: "",
           company: "",
@@ -98,14 +162,13 @@ else {  throw new Error('Errore recupero experienceId')
           hybrid: false,
           imageUrl: null,
         });
-        navigate("/profile")
+        // navigate("/profile")
       } else {
         throw new Error("Errore nel caricamento dell'esperienza");
       }
     } catch (error) {
       console.log(error);
     }
-
   };
 
   // Gestisce i campi input del form (quando vengono modificati). Aggiorna lo stato a ogni modifica.
@@ -117,15 +180,15 @@ else {  throw new Error('Errore recupero experienceId')
     }));
   };
 
-  // Gestisce l'URL dell'immagine caricata (dal componente UploadImg)
-  const handleImageSuccess = (url: string) => {
-    setForm((form) => ({ ...form, imageUrl: url }));
-  };
+  //   // Gestisce l'URL dell'immagine caricata (dal componente UploadImg)
+  //   const handleImageSuccess = (url: string) => {
+  //     setForm((form) => ({ ...form, imageUrl: url }));
+  //   };
 
-  // Gestisce gli errori del caricamento immagine
-  const handleImageError = (error: string) => {
-    console.error(error);
-  };
+  //   // Gestisce gli errori del caricamento immagine
+  //   const handleImageError = (error: string) => {
+  //     console.error(error);
+  //   };
 
   return (
     <div>
@@ -213,27 +276,41 @@ else {  throw new Error('Errore recupero experienceId')
                   </Form.Group>
                 </span>
 
-           
-                <UploadImg
-                  
-                  userId={userId}
-                  apiUrl={`https://striveschool-api.herokuapp.com/api/profile/${userId}/experiences/${experienceId}/picture`}
-                  token={token}
-                  onSuccess={handleImageSuccess}
-                  onError={handleImageError}
-                />
-              
-                 {/* soluzione di chatGpt  { &&} */}
+                <div>
+                  <label htmlFor="uploadImg">Upload Image:</label>
+                  <input
+                    id="uploadImg"
+                    type="file"
+                    accept="image/png, image/jpeg"
+                    onChange={handleImageChange}
+                  />
+                  <button
+                    type="button"
+                    onClick={() => {
+                      handleUpload()
+                        .then(() => {
+                          console.log("Upload successful");
+                        })
+                        .catch((error) => {
+                          console.log(error);
+                          //   onError(error);
+                        });
+                    }}
+                    disabled={!selectedImage}
+                  >
+                    Upload
+                  </button>
+                </div>
+
+                {/* soluzione di chatGpt  { &&} */}
                 <Button
                   id="submitButton"
                   type="submit"
                   className="my-4 fw-bold pt-2 px-3"
                   style={{ borderRadius: "30px" }}
-
                 >
                   Submit
                 </Button>
-               
               </Form>
             </Col>
           </Row>
@@ -243,7 +320,4 @@ else {  throw new Error('Errore recupero experienceId')
   );
 };
 
-
 export default AddExperience;
-
-
