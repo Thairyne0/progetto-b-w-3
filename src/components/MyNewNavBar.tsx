@@ -5,6 +5,7 @@ import Nav from "react-bootstrap/Nav";
 import Navbar from "react-bootstrap/Navbar";
 import NavDropdown from "react-bootstrap/NavDropdown";
 import { useNavigate } from "react-router-dom";
+import MyAccountPopUp from "./MyAccountPopUp";
 
 function MyNewNavBar() {
   const navigate = useNavigate();
@@ -64,14 +65,14 @@ function MyNewNavBar() {
               Notifiche
             </Nav.Link>
             <NavDropdown title="Account" id="navbarScrollingDropdown">
-              <NavDropdown.Item href="#action3">Action</NavDropdown.Item>
+              <NavDropdown.Item onClick={() => handleNavigation("/profile")}>
+                <MyAccountPopUp></MyAccountPopUp>
+              </NavDropdown.Item>
               <NavDropdown.Item href="#action4">
                 Another action
               </NavDropdown.Item>
               <NavDropdown.Divider />
-              <NavDropdown.Item href="#action5">
-                Something else here
-              </NavDropdown.Item>
+              <NavDropdown.Item href="#action5">Log Out</NavDropdown.Item>
             </NavDropdown>
           </Nav>
           <NavDropdown
@@ -92,12 +93,9 @@ function MyNewNavBar() {
             className="d-none d-lg-block me-3"
             drop="start"
           >
-            <NavDropdown.Item href="#action3">Action</NavDropdown.Item>
-            <NavDropdown.Item href="#action4">Another action</NavDropdown.Item>
+            <NavDropdown.Item href="#action3"></NavDropdown.Item>
             <NavDropdown.Divider />
-            <NavDropdown.Item href="#action5">
-              Something else here
-            </NavDropdown.Item>
+            <NavDropdown.Item href="#action5">Action</NavDropdown.Item>
           </NavDropdown>
         </Navbar.Collapse>
       </Container>

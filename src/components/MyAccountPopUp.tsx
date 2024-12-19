@@ -46,7 +46,7 @@ const MyAccountPopUp = () => {
     return <p>Caricamento...</p>;
   }
   return (
-    <div className="rounded-3 bg-white flex flex-column justify-content-center align-items-center">
+    <div className=" bg-transparent flex flex-column justify-content-center align-items-center">
       <div>
         <img
           src={user!.img}
