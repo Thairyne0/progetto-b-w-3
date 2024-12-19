@@ -228,7 +228,7 @@ const CardExperience = (props: ExperienceProps) => {
       <Row className="justify-content-center mt-3">
         {/* <Col className="col col-10 col-md-10">
           <Row className="g-2"> */}
-        <Col className="col-3 col-md-2 d-flex align-self-center ">
+        <Col className="col-3 col-md-2 d-flex pt-2">
           <img
             src={props.experience.image}
             alt="Profile"
