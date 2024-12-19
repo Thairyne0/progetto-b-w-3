@@ -9,7 +9,7 @@ import AddExperience from "./components/AddExperience";
 import Homepage from "./pages/Homepage";
 import { Alert } from "react-bootstrap";
 import MyJobs from "./components/MyJobs";
-
+import MyAccountPopUp from "./components/MyAccountPopUp";
 
 function App() {
   // stato
@@ -87,9 +87,10 @@ function App() {
             }
           />
           <Route path="/home" element={<Homepage></Homepage>} />
-          <Route path="/jobs" element={<MyJobs/>} />
+          <Route path="/jobs" element={<MyJobs />} />
         </Routes>
       </BrowserRouter>
+      <MyAccountPopUp></MyAccountPopUp>
     </>
   );
 }
