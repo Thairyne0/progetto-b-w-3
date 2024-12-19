@@ -1,7 +1,11 @@
 import React, { useEffect, useState } from "react";
 import { Container, Row, Col } from "react-bootstrap";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faImages, faNewspaper, faFile } from "@fortawesome/free-solid-svg-icons";
+import {
+  faImages,
+  faNewspaper,
+  faFile,
+} from "@fortawesome/free-solid-svg-icons";
 import "bootstrap/dist/css/bootstrap.min.css";
 
 // Definizione dei tipi per i Post e i Commenti
@@ -26,12 +30,15 @@ const NewsFeed: React.FC = () => {
   const [posts, setPosts] = useState<Post[]>([]);
   const [comments, setComments] = useState<Record<string, Comment[]>>({}); // Commenti per ogni postId
   const [newPost, setNewPost] = useState<string>(""); // Nuovo post da creare
-  const [newComment, setNewComment] = useState<Record<string, { comment: string; rate: string }>>({}); // Commenti da inviare
+  const [newComment, setNewComment] = useState<
+    Record<string, { comment: string; rate: string }>
+  >({}); // Commenti da inviare
 
   // URL e headers per le API
   const API_URL = "https://striveschool-api.herokuapp.com/api/posts/";
   const API_HEADERS = {
-    Authorization: "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NzM3NDc1YmFlZGU3ODAwMTU3OTM2MTEiLCJpYXQiOjE3MzQ0NDg2MTAsImV4cCI6MTczNTY1ODIxMH0.9M3_iOp0WjTJTZA02nb1HfnKBK_QRacWehSalKJwcYI", // Token da sostituire con quello corretto
+    Authorization:
+      "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NzM3NDc1YmFlZGU3ODAwMTU3OTM2MTEiLCJpYXQiOjE3MzQ0NDg2MTAsImV4cCI6MTczNTY1ODIxMH0.9M3_iOp0WjTJTZA02nb1HfnKBK_QRacWehSalKJwcYI", // Token da sostituire con quello corretto
   };
 
   useEffect(() => {
@@ -118,17 +125,23 @@ const NewsFeed: React.FC = () => {
     };
 
     try {
-      const response = await fetch("https://striveschool-api.herokuapp.com/api/comments/", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-          Authorization: API_HEADERS.Authorization,
-        },
-        body: JSON.stringify(commentData),
-      });
+      const response = await fetch(
+        "https://striveschool-api.herokuapp.com/api/comments/",
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: API_HEADERS.Authorization,
+          },
+          body: JSON.stringify(commentData),
+        }
+      );
 
       if (!response.ok) throw new Error("Errore nella creazione del commento");
-      setNewComment((prev) => ({ ...prev, [postId]: { comment: "", rate: "" } })); // Resetta i campi input
+      setNewComment((prev) => ({
+        ...prev,
+        [postId]: { comment: "", rate: "" },
+      })); // Resetta i campi input
       fetchComments(postId); // Ricarica i commenti del post
     } catch (error) {
       console.error("Errore nella creazione del commento:", error);
@@ -151,15 +164,30 @@ const NewsFeed: React.FC = () => {
             Post
           </button>
           <Container className="text-center">
-            <Row>
+            <Row className="mt-3">
               <Col>
-                <FontAwesomeIcon icon={faImages} size="2x" className="text-primary" /> <span>Media</span>
+                <FontAwesomeIcon
+                  icon={faImages}
+                  size="2x"
+                  className="text-primary me-1"
+                />{" "}
+                <span>Media</span>
               </Col>
               <Col>
-                <FontAwesomeIcon icon={faNewspaper} size="2x" className="text-danger" /><span>Contribute Expertise</span>
+                <FontAwesomeIcon
+                  icon={faNewspaper}
+                  size="2x"
+                  className="text-danger me-2"
+                />
+                <span>Contribute Expertise</span>
               </Col>
               <Col>
-                <FontAwesomeIcon icon={faFile} size="2x" className="text-success" /> <span>Write Article</span>
+                <FontAwesomeIcon
+                  icon={faFile}
+                  size="2x"
+                  className="text-success me-1"
+                />{" "}
+                <span>Write Article</span>
               </Col>
             </Row>
           </Container>
@@ -170,7 +198,10 @@ const NewsFeed: React.FC = () => {
       <div className="mt-4">
         {posts.length > 0 ? (
           posts.slice(25, 35).map((post) => (
-            <div key={post._id} className="bg-white p-3 mb-3 border rounded shadow-sm d-flex">
+            <div
+              key={post._id}
+              className="bg-white p-3 mb-3 border rounded shadow-sm d-flex"
+            >
               {post.image && (
                 <img
                   src={post.image}
@@ -182,7 +213,9 @@ const NewsFeed: React.FC = () => {
               <div>
                 <div className="d-flex justify-content-between">
                   <h6 className="mb-0 fw-bold">{post.username}</h6>
-                  <small className="text-muted">{new Date(post.createdAt).toLocaleString()}</small>
+                  <small className="text-muted">
+                    {new Date(post.createdAt).toLocaleString()}
+                  </small>
                 </div>
                 <p className="mb-1">{post.text}</p>
 
@@ -193,7 +226,8 @@ const NewsFeed: React.FC = () => {
                     {comments[post._id]?.map((comment) => (
                       <div key={comment._id}>
                         <p>
-                          <strong>{comment.comment}</strong> - <span>{comment.rate}⭐</span>
+                          <strong>{comment.comment}</strong> -{" "}
+                          <span>{comment.rate}⭐</span>
                         </p>
                       </div>
                     ))}
@@ -209,7 +243,10 @@ const NewsFeed: React.FC = () => {
                       onChange={(e) =>
                         setNewComment((prev) => ({
                           ...prev,
-                          [post._id]: { ...prev[post._id], comment: e.target.value },
+                          [post._id]: {
+                            ...prev[post._id],
+                            comment: e.target.value,
+                          },
                         }))
                       }
                     />
@@ -221,11 +258,18 @@ const NewsFeed: React.FC = () => {
                       onChange={(e) =>
                         setNewComment((prev) => ({
                           ...prev,
-                          [post._id]: { ...prev[post._id], rate: e.target.value },
+                          [post._id]: {
+                            ...prev[post._id],
+                            rate: e.target.value,
+                          },
                         }))
                       }
                     />
-                    <button className="btn btn-pill" style={{ backgroundColor: '#378FE9' }} onClick={() => createComment(post._id)}>
+                    <button
+                      className="btn btn-pill"
+                      style={{ backgroundColor: "#378FE9" }}
+                      onClick={() => createComment(post._id)}
+                    >
                       Commenta
                     </button>
                   </div>
