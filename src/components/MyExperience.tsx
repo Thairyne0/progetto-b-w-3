@@ -91,10 +91,12 @@ const MyExperience = (props: myExperienceProps) => {
 
             <Button
               variant="outline-primary"
-              size="sm"
+              size="md"
               onClick={handleNavigateRoute}
-              className="mt-2 mb-3"
-              style={{ borderRadius: "25px" }}
+              className="mt-2 mb-3 text-light border-0 py-1 px-3"
+              style={{
+                borderRadius: "25px", backgroundColor: '#378FE9'
+              }}
             >
               Aggiungi esperienza
             </Button>

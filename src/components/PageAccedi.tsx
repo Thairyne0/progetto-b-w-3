@@ -77,7 +77,7 @@ const PageAccedi = (props: PageAccediProps) => {
               </Form.Group>
 
               <Button variant="primary" type="button" onClick={handleLogin}
-                style={{ backgroundColor: '#0A66C2' }}>
+                style={{ backgroundColor: '#378FE9' }}>
                 Accedi
               </Button>
             </Form>
