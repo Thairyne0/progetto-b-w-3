@@ -126,10 +126,7 @@ const CardExperience = (props: ExperienceProps) => {
           </Modal.Title>
         </Modal.Header>
         <Modal.Body>
-          <Form
-            onSubmit={handleSubmit}
-            className="w-100"
-          >
+          <Form onSubmit={handleSubmit} className="w-100">
             <Form.Group className="mb-3 w-75">
               <Form.Label className="fs-5">Ruolo</Form.Label>
               <Form.Control
@@ -182,10 +179,7 @@ const CardExperience = (props: ExperienceProps) => {
               />
             </Form.Group>
             <span className="d-flex align-items-center flex-wrap">
-              <Form.Group
-                className="mb-3"
-                style={{ width: "280px" }}
-              >
+              <Form.Group className="mb-3" style={{ width: "280px" }}>
                 <Form.Label className="fs-5">Sede dell'azienda</Form.Label>
                 <Form.Control
                   type="text"
@@ -199,13 +193,13 @@ const CardExperience = (props: ExperienceProps) => {
                 className="ms-5 mt-4 align-self-center fs-6"
                 controlId="formBasicCheckbox"
               >
-                <Form.Check
+                {/* <Form.Check
                   type="checkbox"
                   label={<span className="ms-2">Ibrido/Smart Working</span>}
                   name="hybrid"
                   checked={formData.hybrid}
                   onChange={handleInputChange}
-                />
+                /> */}
               </Form.Group>
             </span>
 
@@ -213,7 +207,6 @@ const CardExperience = (props: ExperienceProps) => {
               id="submitButton"
               type="submit"
               className="my-4 fw-bold pt-2 px-3 rounded-pill border-0 custom-button"
-
             >
               Submit
             </Button>
@@ -268,9 +261,7 @@ const CardExperience = (props: ExperienceProps) => {
                 <i className="bi bi-trash3 text-black fs-5"></i>
               </Button>
             </span>
-            <Card.Title className="mb-0">
-              {props.experience.role}
-            </Card.Title>
+            <Card.Title className="mb-0">{props.experience.role}</Card.Title>
             <Card.Text className="text-muted m-0">
               <small>
                 {props.experience.company}
@@ -293,8 +284,7 @@ const CardExperience = (props: ExperienceProps) => {
                     ? new Date(props.experience.endDate)
                     : new Date();
                   const months = Math.floor(
-                    (end.getTime() - start.getTime()) /
-                    (1000 * 3600 * 24 * 30)
+                    (end.getTime() - start.getTime()) / (1000 * 3600 * 24 * 30)
                   );
                   const years = Math.floor(months / 12);
                   const remainingMonths = months % 12;
@@ -302,8 +292,9 @@ const CardExperience = (props: ExperienceProps) => {
                   if (years > 0) {
                     return `${years} yr${years > 1 ? "s" : ""}`;
                   } else if (remainingMonths > 0) {
-                    return `${remainingMonths} month${remainingMonths > 1 ? "s" : ""
-                      }`;
+                    return `${remainingMonths} month${
+                      remainingMonths > 1 ? "s" : ""
+                    }`;
                   } else {
                     return "0 months";
                   }
