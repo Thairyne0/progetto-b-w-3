@@ -15,7 +15,7 @@ const PageAccedi = (props: PageAccediProps) => {
   const handleLogin = () => {
     if (props.alert === false) {
       navigate("/profile");
-      console.log("ooooooooo");
+     
     } else {
       props.handleAlert(true);
     }
@@ -46,9 +46,10 @@ const PageAccedi = (props: PageAccediProps) => {
         <Container>
           <Navbar.Brand href="#home">
             <img
-              src="/images/download.png "
+              src="/public/images/LI-Logo.png "
               style={{
                 maxHeight: "70px",
+                maxWidth: '100px',
               }}
               className="d-inline-block align-top img-fluid"
               alt="React Bootstrap logo"
@@ -75,7 +76,8 @@ const PageAccedi = (props: PageAccediProps) => {
                 </Form.Text>
               </Form.Group>
 
-              <Button variant="primary" type="button" onClick={handleLogin}>
+              <Button className="custom-button" type="button" onClick={handleLogin}>
+
                 Accedi
               </Button>
             </Form>
@@ -94,7 +96,7 @@ const PageAccedi = (props: PageAccediProps) => {
             </p>
           </Col>
         </Row>
-      </Container>
+      </Container >
     </>
   );
 };

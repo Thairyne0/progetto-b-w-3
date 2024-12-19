@@ -3,7 +3,7 @@ import { Button, Col, Container, Form, Row } from "react-bootstrap";
 // import UploadImg from "./UploadImg";
 import MyNewNavBar from "./MyNewNavBar";
 
-// import { useNavigate} from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 
 // Interface with form fields
 interface ExperienceForm {
@@ -24,6 +24,8 @@ const AddExperience = ({ userId, token }: AddExperienceProps) => {
   //   const [experienceId, setExperienceId] = useState<string | null>(null);
   //   const navigate=useNavigate()
 
+  const navigate = useNavigate();
+  // Set the initial state of the form including imageUrl
   const [form, setForm] = useState<ExperienceForm>({
     role: "",
     company: "",
@@ -154,7 +156,7 @@ const AddExperience = ({ userId, token }: AddExperienceProps) => {
           description: "",
           area: "",
         });
-        // navigate("/profile")
+        navigate("/profile");
       } else {
         throw new Error("Errore nel caricamento dell'esperienza");
       }

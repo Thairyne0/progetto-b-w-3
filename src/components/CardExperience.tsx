@@ -126,7 +126,10 @@ const CardExperience = (props: ExperienceProps) => {
           </Modal.Title>
         </Modal.Header>
         <Modal.Body>
-          <Form onSubmit={handleSubmit} className="w-100">
+          <Form
+            onSubmit={handleSubmit}
+            className="w-100"
+          >
             <Form.Group className="mb-3 w-75">
               <Form.Label className="fs-5">Ruolo</Form.Label>
               <Form.Control
@@ -179,7 +182,10 @@ const CardExperience = (props: ExperienceProps) => {
               />
             </Form.Group>
             <span className="d-flex align-items-center flex-wrap">
-              <Form.Group className="mb-3" style={{ width: "280px" }}>
+              <Form.Group
+                className="mb-3"
+                style={{ width: "280px" }}
+              >
                 <Form.Label className="fs-5">Sede dell'azienda</Form.Label>
                 <Form.Control
                   type="text"
@@ -193,21 +199,21 @@ const CardExperience = (props: ExperienceProps) => {
                 className="ms-5 mt-4 align-self-center fs-6"
                 controlId="formBasicCheckbox"
               >
-                {/* <Form.Check
+                <Form.Check
                   type="checkbox"
                   label={<span className="ms-2">Ibrido/Smart Working</span>}
                   name="hybrid"
                   checked={formData.hybrid}
                   onChange={handleInputChange}
-                /> */}
+                />
               </Form.Group>
             </span>
 
             <Button
               id="submitButton"
               type="submit"
-              className="my-4 fw-bold pt-2 px-3"
-              style={{ borderRadius: "30px" }}
+              className="my-4 fw-bold pt-2 px-3 rounded-pill border-0 custom-button"
+
             >
               Submit
             </Button>
@@ -220,100 +226,99 @@ const CardExperience = (props: ExperienceProps) => {
   return (
     <>
       <Row className="justify-content-center mt-3">
-        <Col className="col col-10 col-md-10">
-          <Row className="g-2">
-            <Col className="col-2 col-md-1 ">
-              <img
-                src={props.experience.image}
-                alt="Profile"
-                className="img-fluid rounded-start"
-                style={{
-                  objectFit: "contain",
-                  height: "80px",
-                  width: "80px",
-                  minWidth: "50px",
-                  minHeight: "50px",
-                }}
+        {/* <Col className="col col-10 col-md-10">
+          <Row className="g-2"> */}
+        <Col className="col-3 col-md-2 d-flex align-self-center ">
+          <img
+            src={props.experience.image}
+            alt="Profile"
+            className="img-fluid rounded-start"
+            style={{
+              objectFit: "contain",
+              height: "80px",
+              width: "80px",
+              minWidth: "50px",
+              minHeight: "50px",
+            }}
+          />
+        </Col>
+        <Col className="col-9 col-md-10">
+          <Card.Body className="d-flex flex-column">
+            <span className="align-self-end justify-content-center">
+              <Button
+                style={{ backgroundColor: "transparent" }}
+                className="small p-1 border-0 me-2"
+                onClick={() => setModalShow(true)}
+              >
+                <i className="bi bi-pencil-square text-black fs-5"></i>
+              </Button>
+
+              <MyVerticallyCenteredModal
+                experience={props.experience}
+                show={modalShow}
+                onHide={() => setModalShow(false)}
+                onEdit={props.onEdit}
               />
-            </Col>
-            <Col className="col-10 col-md-11">
-              <Card.Body className="d-flex flex-column">
-                <span className="align-self-end justify-content-center">
-                  <Button
-                    style={{ backgroundColor: "transparent" }}
-                    className="small p-1 border-0 me-2"
-                    onClick={() => setModalShow(true)}
-                  >
-                    <i className="bi bi-pencil-square text-black fs-5"></i>
-                  </Button>
 
-                  <MyVerticallyCenteredModal
-                    experience={props.experience}
-                    show={modalShow}
-                    onHide={() => setModalShow(false)}
-                    onEdit={props.onEdit}
-                  />
+              <Button
+                style={{ backgroundColor: "transparent" }}
+                className="small p-1 border-0"
+                onClick={handleDelete}
+              >
+                <i className="bi bi-trash3 text-black fs-5"></i>
+              </Button>
+            </span>
+            <Card.Title className="mb-0">
+              {props.experience.role}
+            </Card.Title>
+            <Card.Text className="text-muted m-0">
+              <small>
+                {props.experience.company}
+                <br />
+                {new Intl.DateTimeFormat("en-US", {
+                  year: "numeric",
+                  month: "short",
+                }).format(new Date(props.experience.startDate))}{" "}
+                -{" "}
+                {new Intl.DateTimeFormat("en-US", {
+                  year: "numeric",
+                  month: "short",
+                }).format(
+                  new Date(props.experience.endDate || new Date())
+                )}{" "}
+                ·{" "}
+                {(() => {
+                  const start = new Date(props.experience.startDate);
+                  const end = props.experience.endDate
+                    ? new Date(props.experience.endDate)
+                    : new Date();
+                  const months = Math.floor(
+                    (end.getTime() - start.getTime()) /
+                    (1000 * 3600 * 24 * 30)
+                  );
+                  const years = Math.floor(months / 12);
+                  const remainingMonths = months % 12;
 
-                  <Button
-                    style={{ backgroundColor: "transparent" }}
-                    className="small p-1 border-0"
-                    onClick={handleDelete}
-                  >
-                    <i className="bi bi-trash3 text-black fs-5"></i>
-                  </Button>
-                </span>
-                <Card.Title className="mb-0">
-                  {props.experience.role}
-                </Card.Title>
-                <Card.Text className="text-muted m-0">
-                  <small>
-                    {props.experience.company}
-                    <br />
-                    {new Intl.DateTimeFormat("en-US", {
-                      year: "numeric",
-                      month: "short",
-                    }).format(new Date(props.experience.startDate))}{" "}
-                    -{" "}
-                    {new Intl.DateTimeFormat("en-US", {
-                      year: "numeric",
-                      month: "short",
-                    }).format(
-                      new Date(props.experience.endDate || new Date())
-                    )}{" "}
-                    ·{" "}
-                    {(() => {
-                      const start = new Date(props.experience.startDate);
-                      const end = props.experience.endDate
-                        ? new Date(props.experience.endDate)
-                        : new Date();
-                      const months = Math.floor(
-                        (end.getTime() - start.getTime()) /
-                          (1000 * 3600 * 24 * 30)
-                      );
-                      const years = Math.floor(months / 12);
-                      const remainingMonths = months % 12;
-
-                      if (years > 0) {
-                        return `${years} yr${years > 1 ? "s" : ""}`;
-                      } else if (remainingMonths > 0) {
-                        return `${remainingMonths} month${
-                          remainingMonths > 1 ? "s" : ""
-                        }`;
-                      } else {
-                        return "0 months";
-                      }
-                    })()}
-                  </small>
-                  <br />
-                  <small>{props.experience.area}</small>
-                </Card.Text>
-                <p className="m-0">{props.experience.description}</p>
-                <Card.Text>Translation, Microsoft Word and +2 skills</Card.Text>
-              </Card.Body>
-            </Col>
-          </Row>
+                  if (years > 0) {
+                    return `${years} yr${years > 1 ? "s" : ""}`;
+                  } else if (remainingMonths > 0) {
+                    return `${remainingMonths} month${remainingMonths > 1 ? "s" : ""
+                      }`;
+                  } else {
+                    return "0 months";
+                  }
+                })()}
+              </small>
+              <br />
+              <small>{props.experience.area}</small>
+            </Card.Text>
+            <p className="m-0">{props.experience.description}</p>
+            <Card.Text>Translation, Microsoft Word and +2 skills</Card.Text>
+          </Card.Body>
         </Col>
       </Row>
+      {/* </Col>
+      </Row> */}
       <hr />
     </>
   );

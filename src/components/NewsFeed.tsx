@@ -151,18 +151,18 @@ const NewsFeed: React.FC = () => {
             Post
           </button>
           <Container className="text-center">
-          <Row>
-            <Col>
-              <FontAwesomeIcon icon={faImages} size="2x" className="text-primary" /> <span>Media</span>
-            </Col>
-            <Col>
-              <FontAwesomeIcon icon={faNewspaper} size="2x" className="text-danger" /><span>Contribute Expertise</span>
-            </Col>
-            <Col>
-              <FontAwesomeIcon icon={faFile} size="2x" className="text-success" /> <span>Write Article</span>
-            </Col>
-          </Row>
-        </Container>
+            <Row>
+              <Col>
+                <FontAwesomeIcon icon={faImages} size="2x" className="text-primary" /> <span>Media</span>
+              </Col>
+              <Col>
+                <FontAwesomeIcon icon={faNewspaper} size="2x" className="text-danger" /><span>Contribute Expertise</span>
+              </Col>
+              <Col>
+                <FontAwesomeIcon icon={faFile} size="2x" className="text-success" /> <span>Write Article</span>
+              </Col>
+            </Row>
+          </Container>
         </div>
       </div>
 
@@ -225,7 +225,7 @@ const NewsFeed: React.FC = () => {
                         }))
                       }
                     />
-                    <button className="btn btn-primary" onClick={() => createComment(post._id)}>
+                    <button className="btn btn-pill" style={{ backgroundColor: '#378FE9' }} onClick={() => createComment(post._id)}>
                       Commenta
                     </button>
                   </div>

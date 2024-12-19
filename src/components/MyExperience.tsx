@@ -3,15 +3,12 @@ import CardExperience from "./CardExperience";
 import IExperience from "../types/Experience";
 import { useNavigate } from "react-router-dom";
 
-
 import ProfileData from "../types/profileData";
-import { Button, Card, Col, Row } from "react-bootstrap";
-
+import { Button, Col, Row } from "react-bootstrap";
 
 interface myExperienceProps {
   profilo: ProfileData;
   token: string | null;
-
 }
 
 const MyExperience = (props: myExperienceProps) => {
@@ -66,24 +63,22 @@ const MyExperience = (props: myExperienceProps) => {
     );
   };
 
-
-
   return (
     <>
-      <section className="  mt-3 col col-12 col-md-11 col-lg-11 bg-white rounded-3 ">
+      <section className="  mt-3 col col-12 col-md-11 col-lg-11 bg-white shadow rounded-3 ">
         <Row className=" justify-content-center">
-          <Col className="col col-10 col-md-10 border border-muted mt-3  rounded-2 ps-2">
-            <h5 className="text-muted m-0">Esperienza</h5>
+          <Col className="col col-10 col-md-10 mt-3  rounded-2 ps-2">
+            {/* <h5 className="text-muted m-0">Esperienza</h5>
             <small className="m-0 text-mute mb-2">
               Metti in risalto i risultati raggiunti e ottieni fino a 2 volte in
               più visualizzazioni del profilo e collegamenti{" "}
-            </small>
-            <Row className="g-2 mt-1">
-              <Col className="col col-4 col-md-2  d-flex align-items-baseline ">
+            </small> */}
+            {/* <Row className="g-2 mt-1"> */}
+            {/* <Col className="col col-4 col-md-2  d-flex align-items-baseline ">
                 <i className="bi bi-briefcase-fill px-3 py-2 border border-secondary text-secondary rounded-2"></i>
-              </Col>
-              <Col className="col-8 col-md-8 col-lg-11">
-                <Card.Body>
+              </Col> */}
+            {/* <Col className="col-8 col-md-8 col-lg-11"> */}
+            {/* <Card.Body>
                   <small className="m-0 text-secondary">Qualifica</small>
                   <Card.Text className="text-secondary m-0">
                     <small>organizzazione</small>
@@ -91,31 +86,34 @@ const MyExperience = (props: myExperienceProps) => {
 
                     <small className="text-secondary">2023-presente</small>
                   </Card.Text>
-                </Card.Body>
-              </Col>
+                </Card.Body> */}
+            {/* </Col> */}
 
-              <Button
-                variant="outline-primary"
-                size="sm"
-                onClick={handleNavigateRoute}
-              >
-                Aggiungi esperienza
-              </Button>
-            </Row>
+            <Button
+
+              size="sm"
+              onClick={handleNavigateRoute}
+              className="mt-2 mb-3 text-light border-0 py-2 px-4 rounded-pill custom-button"
+
+            >
+              Aggiungi esperienza
+            </Button>
+            {/* </Row> */}
+
+            {experiences.map((experience) => {
+              return (
+                <CardExperience
+                  key={experience._id}
+                  experience={experience}
+                  token={props.token}
+                  profileId={props.profilo._id}
+                  onDelete={handleDeleteExperience}
+                  onEdit={handleEditExperience}
+                />
+              );
+            })}
           </Col>
         </Row>
-
-        {experiences.map((experience) => {
-          return <CardExperience
-            key={experience._id}
-            experience={experience}
-            token={props.token}
-            profileId={props.profilo._id}
-            onDelete={handleDeleteExperience}
-            onEdit={handleEditExperience}
-          />
-        }
-        )}
       </section>
     </>
   );
