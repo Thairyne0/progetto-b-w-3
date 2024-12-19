@@ -5,7 +5,7 @@ import { useNavigate } from "react-router-dom";
 
 
 import ProfileData from "../types/profileData";
-import { Button, Card, Col, Row } from "react-bootstrap";
+import { Button, Col, Row } from "react-bootstrap";
 
 
 interface myExperienceProps {
