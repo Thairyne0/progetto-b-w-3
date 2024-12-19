@@ -1,3 +1,5 @@
+
+
 import Button from "react-bootstrap/Button";
 import Container from "react-bootstrap/Container";
 import Form from "react-bootstrap/Form";
@@ -6,8 +8,17 @@ import Navbar from "react-bootstrap/Navbar";
 import NavDropdown from "react-bootstrap/NavDropdown";
 import { useNavigate } from "react-router-dom";
 
-function MyNewNavBar() {
+
+interface navbarProps{
+  setSearch?:React.Dispatch<React.SetStateAction<string>>,
+  search?:string
+}
+
+
+
+function MyNewNavBar(props:navbarProps) {
   const navigate = useNavigate();
+ 
 
   const handleNavigation = (route: string) => {
     navigate(route);
@@ -16,7 +27,7 @@ function MyNewNavBar() {
   return (
     <Navbar expand="lg" className="bg-body-tertiary flex align-items-center">
       <Container fluid>
-        <a href="">
+        <a href="#">
           <h2 className="px-2 fw-bold bg-primary d-inline-block text-light rounded me-3 mt-1">
             in
           </h2>
@@ -34,8 +45,16 @@ function MyNewNavBar() {
                 placeholder="Search"
                 className="me-2"
                 aria-label="Search"
+                value={props.search}
+                onChange={(e)=>{props.setSearch!(e.target.value)}}
               />
               <Button variant="btn btn-primary">Cerca</Button>
+              {/* <Form.Select aria-label="Default select example">
+                <option>search for...</option>
+                <option value="1">Word</option>
+                <option value="2">Company</option>
+                <option value="3">Category</option>
+              </Form.Select> */}
             </Form>
             <Nav.Link
               className="fw-bold"
@@ -50,7 +69,7 @@ function MyNewNavBar() {
             </Nav.Link>
             <Nav.Link
               className="fw-bold"
-              onClick={() => handleNavigation("/job")}
+              onClick={() => handleNavigation("/jobs")}
             >
               <i className="bi bi-suitcase-lg-fill me-1"></i>
               Lavoro

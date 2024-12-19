@@ -21,9 +21,19 @@ const MyJobs = () => {
   const [visibleJobs, setVisibleJobs] = useState<Job[]>([]); // Stato che contiene solo i lavori visibili (10 alla volta)
   const [currentPage, setCurrentPage] = useState(1); // La pagina corrente per la paginazione
   const jobsPerPage = 10; // Numero di lavori da caricare per pagina
+  const[search, setSearch]=useState("")
 
-  const GetJobs = () => {
-    fetch("https://strive-benchmark.herokuapp.com/api/jobs ")
+
+
+  const GetJobs = (query:string="") => {
+    let URL="https://strive-benchmark.herokuapp.com/api/jobs"
+    if(query) {
+        URL=`https://strive-benchmark.herokuapp.com/api/jobs?search=${query}`
+    }
+
+
+
+    fetch(URL)
       .then((response) => {
         if (response.ok) {
           return response.json();
@@ -41,9 +51,11 @@ const MyJobs = () => {
       });
   };
 
+ 
+
   useEffect(() => {
-    GetJobs();
-  }, []);
+    GetJobs(search); 
+  }, [search]);
 
   const loadMoreJobs = () => {
     const nextPage = currentPage + 1; // Aumenta la pagina corrente
@@ -58,7 +70,7 @@ const MyJobs = () => {
 
   return (
     <>
-      <MyNewNavBar />
+      <MyNewNavBar search={search} setSearch={setSearch} />
       <Container fluid>
         <Row className=" justify-content-center mt-5">
           <Col className="col col-2">
