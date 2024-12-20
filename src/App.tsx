@@ -7,13 +7,13 @@ import Profile from "./pages/Profile";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import AddExperience from "./components/AddExperience";
 import Homepage from "./pages/Homepage";
-import { Alert } from "react-bootstrap";
+// import { Alert } from "react-bootstrap";
 import MyJobs from "./components/MyJobs";
 
 function App() {
   // stato
   const [token, settoken] = useState<string>("");
-  const [alert, setAlert] = useState<boolean>(false);
+  // const [alert, setAlert] = useState<boolean>(false);
   const [profileData, setProfileData] = useState({
     name: "",
     surname: "",
@@ -30,9 +30,9 @@ function App() {
   };
 
   // funzione per l'alert
-  const handleAlert = (status: boolean) => {
-    setAlert(status);
-  };
+  // const handleAlert = (status: boolean) => {
+  //   setAlert(status);
+  // };
 
   //  funzione per cambiare lo stato di key
   const HandletokenChange = (value: string) => {
@@ -48,16 +48,16 @@ function App() {
   return (
     <>
       <BrowserRouter>
-        {alert && (
+        {/* {alert && (
           <Alert variant="danger">Il token inserito non è valido!</Alert>
-        )}
+        )} */}
         <Routes>
           <Route
             path="/"
             element={
               <PageAccedi
-                handleAlert={handleAlert}
-                alert={alert}
+                // handleAlert={handleAlert}
+                // alert={alert}
                 token={token}
                 ChangeToken={HandletokenChange}
                 onSubmit={handleSubmit}
@@ -68,7 +68,7 @@ function App() {
             path="/profile"
             element={
               <Profile
-                handleAlert={handleAlert}
+                // handleAlert={handleAlert}
                 token={localStorage.getItem("userToken")}
                 profileData={profileData}
                 updateProfileData={updateProfileData}
@@ -86,7 +86,7 @@ function App() {
             }
           />
           <Route path="/home" element={<Homepage></Homepage>} />
-          <Route path="/jobs" element={<MyJobs/>} />
+          <Route path="/jobs" element={<MyJobs />} />
         </Routes>
       </BrowserRouter>
     </>
