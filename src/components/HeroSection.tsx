@@ -3,7 +3,6 @@ import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import TokenProps from "../types/Hero";
 
-
 const HeroSection = (props: TokenProps) => {
   const imgHeroStyle = {
     borderRadius: "50%",
@@ -29,8 +28,8 @@ const HeroSection = (props: TokenProps) => {
 
   const buttonStyles = (hovered: boolean) => ({
     backgroundColor: hovered ? "#0A66C2" : "#378FE9",
-    border: '0px',
-    color: 'white',
+    border: "0px",
+    color: "white",
     marginTop: "1em",
     borderRadius: "30px",
     padding: "0.25em 1em",
@@ -47,7 +46,6 @@ const HeroSection = (props: TokenProps) => {
   const [hoveredButton1, setHoveredButton1] = useState(false);
   const [hoveredButton2, setHoveredButton2] = useState(false);
 
-
   const navigate = useNavigate();
 
   const handleEditProfile = () => {
@@ -55,7 +53,6 @@ const HeroSection = (props: TokenProps) => {
   };
 
   useEffect(() => {
-
     fetch("https://striveschool-api.herokuapp.com/api/profile/me", {
       headers: {
         Authorization: `Bearer ${props.token}`, // Your token
@@ -85,22 +82,20 @@ const HeroSection = (props: TokenProps) => {
       })
 
       .catch((error) => {
-        console.error(error)
-        props.handleAlert!(true)
-
+        console.error(error);
+        props.handleAlert!(true);
       });
   }, []);
   // [props.token, props.updateProfileData]
 
   return (
     <>
-
       <section className="mt-3 col col-12 col-md-11 col-lg-11 bg-white shadow rounded-3 ">
         <div
           className=" rounded-top-3"
           style={{
             backgroundImage:
-              "url(https://dummyimage.com/600x400/000/fff&text=Hello)",
+              "url(https://static.wikitide.net/1d6chanwiki/b/b2/Space_Marine_II.png)",
             height: "200px",
             width: "100%",
             backgroundSize: "cover",
@@ -136,7 +131,6 @@ const HeroSection = (props: TokenProps) => {
           </a>
           <div className="hero-buttons">
             <button
-
               style={buttonStyles(hoveredButton1)}
               onMouseEnter={() => setHoveredButton1(true)}
               onMouseLeave={() => setHoveredButton1(false)}
