@@ -6,7 +6,7 @@ const MyFooter = () => {
 
     return (
         <Container
-            className="mt-3"
+            className="mt-5"
             style={{ backgroundColor: "#F4F2EE" }}
         >
             <Row className="justify-content-around">
