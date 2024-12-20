@@ -2,6 +2,7 @@ import { useState, useEffect } from "react";
 import UploadImg from "./UploadImg";
 import Form from "react-bootstrap/Form";
 import MyNewNavBar from "./MyNewNavBar";
+import { useNavigate } from "react-router-dom";
 
 const EditProfile: React.FC = () => {
   const [profileData, setProfileData] = useState({
@@ -14,7 +15,7 @@ const EditProfile: React.FC = () => {
     image: "",
     _id: "",
   });
-
+ const navigate=useNavigate()
   const token: string | null = localStorage.getItem("userToken");
 
   useEffect(() => {
@@ -36,6 +37,7 @@ const EditProfile: React.FC = () => {
           image: data.image,
           _id: data._id,
         });
+       
       })
       .catch((error) => console.error("Error fetching profile data:", error));
   }, []);
@@ -49,6 +51,7 @@ const EditProfile: React.FC = () => {
       title: profileData.title,
       area: profileData.area,
       image: profileData.image,
+  
     };
 
     fetch("https://striveschool-api.herokuapp.com/api/profile/", {
@@ -74,6 +77,7 @@ const EditProfile: React.FC = () => {
       });
 
     alert("Profile Updated");
+    navigate("/profile")
   };
 
   return (
