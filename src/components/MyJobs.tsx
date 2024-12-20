@@ -116,7 +116,7 @@ const MyJobs = () => {
           <Col className="col col-11 col-md-4 col-lg-3 mb-2 p-0 me-md-3">
             <UserProfile />
           </Col>
-          <Col className="col col-11 col-md-7 col-lg-6 bg-light card mb-3">
+          <Col className="col col-11 col-md-7 col-lg-6 card mb-3 bg-white shadow rounded-3 border-0 px-5">
             <Container>
               <Row>
                 <Col className="col col-9">

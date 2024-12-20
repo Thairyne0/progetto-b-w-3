@@ -50,7 +50,7 @@ const UserProfile: React.FC = () => {
   }, []);
 
   return (
-    <Card>
+    <Card className="border-0 bg-white shadow rounded-3">
       {/* Sfondo statico */}
       <div
         style={{
