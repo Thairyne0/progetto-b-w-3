@@ -1,6 +1,7 @@
-import { useEffect } from "react";
-import { Navbar, Container, Row, Col, Form, Button } from "react-bootstrap";
+import { useEffect, useState } from "react";
+import { Navbar, Container, Row, Col, Form, Button, Alert, Fade } from "react-bootstrap";
 import { useNavigate } from "react-router-dom";
+
 interface PageAccediProps {
   token: string;
   ChangeToken: (value: string) => void;
@@ -11,33 +12,49 @@ interface PageAccediProps {
 
 const PageAccedi = (props: PageAccediProps) => {
   const navigate = useNavigate();
+  const [showAlert, setShowAlert] = useState(false)
 
   const handleLogin = () => {
-    if (props.alert === false) {
-      navigate("/profile");
-     
+    if (props.token.startsWith('.')) {
+      setShowAlert(true)
+
     } else {
-      props.handleAlert(true);
+      setShowAlert(false)
+      navigate('./profile')
     }
   };
 
   useEffect(() => {
-    fetch("https://striveschool-api.herokuapp.com/api/profile/me", {
-      headers: {
-        Authorization: `Bearer ${props.token}`,
-        "Content-Type": "application/json",
-      },
-    })
-      .then((response) => {
-        if (response.ok) {
-          props.handleAlert(false); // Resetta l'alert se il token è valido
-        } else {
-          props.handleAlert(true); // Mostra l'alert se la risposta è negativa
-        }
+    if (props.token === '') {
+      setShowAlert(false)
+
+      return;
+    }
+
+    if (props.token.startsWith('.')) {
+      setShowAlert(true)
+      return
+    }
+
+    if (props.token !== '') {
+      fetch("https://striveschool-api.herokuapp.com/api/profile/me", {
+        headers: {
+          Authorization: `Bearer ${props.token}`,
+          "Content-Type": "application/json",
+        },
       })
-      .catch(() => {
-        props.handleAlert(true); // Mostra l'alert se la fetch fallisce
-      });
+        .then((response) => {
+          if (response.ok) {
+            props.handleAlert(false)
+            setShowAlert(false); // Resetta l'alert se il token è valido
+          } else {
+            props.handleAlert(true); // Mostra l'alert se la risposta è negativa
+          }
+        })
+        .catch(() => {
+          props.handleAlert(true); // Mostra l'alert se la fetch fallisce
+        });
+    }
   }, [props.onSubmit]);
 
   return (
@@ -52,12 +69,15 @@ const PageAccedi = (props: PageAccediProps) => {
                 maxWidth: '100px',
               }}
               className="d-inline-block align-top img-fluid"
-              alt="React Bootstrap logo"
+              alt="LinkedIn logo"
             />
           </Navbar.Brand>
         </Container>
       </Navbar>
+
+
       <Container>
+
         <Row>
           <Col className="col-6 m-auto shadow p-3 mb-5 bg-body-tertiary rounded">
             <Form>
@@ -75,6 +95,7 @@ const PageAccedi = (props: PageAccediProps) => {
                   Insert your Bearer Token
                 </Form.Text>
               </Form.Group>
+
 
               <Button className="custom-button" type="button" onClick={handleLogin}>
 
@@ -96,6 +117,8 @@ const PageAccedi = (props: PageAccediProps) => {
             </p>
           </Col>
         </Row>
+        <Row className="d-flex justify-content-center mt-5">
+          {showAlert && (<Alert variant="danger" className="w-25 text-center">Il token inserito non è valido!</Alert>)}</Row>
       </Container >
     </>
   );
