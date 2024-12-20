@@ -91,7 +91,7 @@ function MyNewNavBar(props: navbarProps) {
               <NavDropdown.Item
                 href="#action5"
                 onClick={() => {
-                  localStorage.clear();
+                  //   localStorage.clear();
                   navigate("/");
                 }}
               >
