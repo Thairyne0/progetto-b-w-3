@@ -6,8 +6,8 @@ interface PageAccediProps {
   token: string;
   ChangeToken: (value: string) => void;
   onSubmit: (event: React.FormEvent) => void;
-  handleAlert: (status: boolean) => void;
-  alert: boolean;
+  // handleAlert: (status: boolean) => void;
+  // alert: boolean;
 }
 
 const PageAccedi = (props: PageAccediProps) => {
@@ -27,8 +27,7 @@ const PageAccedi = (props: PageAccediProps) => {
   useEffect(() => {
     if (props.token === '') {
       setShowAlert(false)
-
-      return;
+      return
     }
 
     if (props.token.startsWith('.')) {
@@ -45,14 +44,14 @@ const PageAccedi = (props: PageAccediProps) => {
       })
         .then((response) => {
           if (response.ok) {
-            props.handleAlert(false)
+            // props.handleAlert(false)
             setShowAlert(false); // Resetta l'alert se il token è valido
           } else {
-            props.handleAlert(true); // Mostra l'alert se la risposta è negativa
+            setShowAlert(true); // Mostra l'alert se la risposta è negativa
           }
         })
         .catch(() => {
-          props.handleAlert(true); // Mostra l'alert se la fetch fallisce
+          setShowAlert(true); // Mostra l'alert se la fetch fallisce
         });
     }
   }, [props.onSubmit]);
