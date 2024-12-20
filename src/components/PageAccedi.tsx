@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { Navbar, Container, Row, Col, Form, Button, Alert, Fade } from "react-bootstrap";
+import { Navbar, Container, Row, Col, Form, Button, Alert } from "react-bootstrap";
 import { useNavigate } from "react-router-dom";
 
 interface PageAccediProps {
