@@ -10,6 +10,7 @@ import { useNavigate } from "react-router-dom";
 import MyAccountPopUp from "./MyAccountPopUp";
 
 
+
 interface navbarProps {
   setSearch?: React.Dispatch<React.SetStateAction<string>>,
   search?: string
@@ -91,7 +92,9 @@ function MyNewNavBar(props: navbarProps) {
                 Another action
               </NavDropdown.Item>
               <NavDropdown.Divider />
-              <NavDropdown.Item href="#action5">Log Out</NavDropdown.Item>
+              <NavDropdown.Item href="#action5" onClick={()=>{
+                localStorage.clear(); navigate("/")
+              }}>Log Out</NavDropdown.Item>
             </NavDropdown>
           </Nav>
           <NavDropdown
