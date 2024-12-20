@@ -1,5 +1,3 @@
-
-
 import Button from "react-bootstrap/Button";
 import Container from "react-bootstrap/Container";
 import Form from "react-bootstrap/Form";
@@ -9,18 +7,13 @@ import NavDropdown from "react-bootstrap/NavDropdown";
 import { useNavigate } from "react-router-dom";
 import MyAccountPopUp from "./MyAccountPopUp";
 
-
-
 interface navbarProps {
-  setSearch?: React.Dispatch<React.SetStateAction<string>>,
-  search?: string
+  setSearch?: React.Dispatch<React.SetStateAction<string>>;
+  search?: string;
 }
-
-
 
 function MyNewNavBar(props: navbarProps) {
   const navigate = useNavigate();
-
 
   const handleNavigation = (route: string) => {
     navigate(route);
@@ -30,7 +23,10 @@ function MyNewNavBar(props: navbarProps) {
     <Navbar expand="lg" className="bg-body-tertiary flex align-items-center">
       <Container fluid>
         <a href="#">
-          <h2 className="px-2 fw-bold d-inline-block text-light rounded me-3 mt-1" style={{ backgroundColor: '#378FE9' }}>
+          <h2
+            className="px-2 fw-bold d-inline-block text-light rounded me-3 mt-1"
+            style={{ backgroundColor: "#378FE9" }}
+          >
             in
           </h2>
         </a>
@@ -48,7 +44,9 @@ function MyNewNavBar(props: navbarProps) {
                 className="me-2"
                 aria-label="Search"
                 value={props.search}
-                onChange={(e) => { props.setSearch!(e.target.value) }}
+                onChange={(e) => {
+                  props.setSearch!(e.target.value);
+                }}
               />
               <Button className="custom-button border-0">Cerca</Button>
               {/* <Form.Select aria-label="Default select example">
@@ -88,13 +86,17 @@ function MyNewNavBar(props: navbarProps) {
               <NavDropdown.Item onClick={() => handleNavigation("/profile")}>
                 <MyAccountPopUp></MyAccountPopUp>
               </NavDropdown.Item>
-              <NavDropdown.Item href="#action4">
-                Another action
-              </NavDropdown.Item>
+
               <NavDropdown.Divider />
-              <NavDropdown.Item href="#action5" onClick={()=>{
-                localStorage.clear(); navigate("/")
-              }}>Log Out</NavDropdown.Item>
+              <NavDropdown.Item
+                href="#action5"
+                onClick={() => {
+                  localStorage.clear();
+                  navigate("/");
+                }}
+              >
+                Log Out
+              </NavDropdown.Item>
             </NavDropdown>
           </Nav>
           <NavDropdown
