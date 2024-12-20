@@ -18,7 +18,6 @@ interface Job {
   url: string;
 }
 
-
 interface User {
   _id: string;
   name: string;
@@ -147,8 +146,7 @@ const MyJobs = () => {
                 </Col>
               </Row>
             </Container>
-          </Col>
-          <Col className="col col-11 col-md-7 col-lg-6 bg-light rounded-3 ">
+
             <h5 className=" mt-3">Le principali offerte di lavoro per te </h5>
             <p className="text-secondary small">
               In base al tuo profilo, alle tue preferenze e ad attività come
@@ -166,7 +164,6 @@ const MyJobs = () => {
               </a>
             </div>
           </Col>
-         
         </Row>
       </Container>
       <MyFooter />
